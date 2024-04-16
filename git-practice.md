@@ -1,5 +1,9 @@
 
-### Create a GitHub Repository wiley-team-name-repo
+### Git Practice
+
+```text
+
+Create a GitHub Repository wiley-team-name-repo
 
 clone that repository to your local system
 
@@ -32,3 +36,5 @@ f1 - add/modify and commit
 resolve conflicts
 
 merge m and f1
+
+```
