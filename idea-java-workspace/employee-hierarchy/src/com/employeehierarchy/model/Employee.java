@@ -1,11 +1,11 @@
 package com.employeehierarchy.model;
 
-public class Employee {
+public abstract class Employee {
 
-    protected int id;
-    protected String name;
-    protected String email;
-    protected float salary;
+    private int id;
+    private String name;
+    private String email;
+    private float salary;
 
     public Employee(int id, String name, String email, float salary) {
         this.id = id;
@@ -63,11 +63,6 @@ public class Employee {
     }
 
 
-    public void showEmployeeInfo(){
-        System.out.println("ID : "+id);
-        System.out.println("Name : "+name);
-        System.out.println("Email : "+email);
-        System.out.println("Salary : "+salary);
-    }
+    public abstract void showEmployeeInfo();
 
 }

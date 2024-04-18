@@ -1,6 +1,6 @@
 package com.employeehierarchy.model;
 
-public class Developer extends Employee {
+public abstract class Developer extends Employee {
 
     private String programmingLanguage;
 
@@ -12,16 +12,20 @@ public class Developer extends Employee {
         this.programmingLanguage = programmingLanguage;
     }
 
+    public Developer(){
+
+    }
+
     public Developer(int id, String name, String email, float salary, String programmingLanguage){
         super(id,name,email,salary);
         this.programmingLanguage = programmingLanguage;
     }
 
-
-    public void showEmployeeInfo(){
-        System.out.println("Developer Info : ");
-        super.showEmployeeInfo();
-        System.out.println("Programming Language : "+programmingLanguage);
+    public void debugCode(){
+        System.out.println("Debugging Code");
     }
+
+
+    public abstract void showEmployeeInfo();
 
 }
