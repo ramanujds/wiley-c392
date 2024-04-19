@@ -34,3 +34,8 @@ The Agile Manifesto outlines twelve principles that guide agile software develop
 10. Simplicity—the art of maximizing the amount of work not done—is essential.
 11. The best architectures, requirements, and designs emerge from self-organizing teams.
 12. At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
+
+## Day 4
+
+![image](https://github.com/ramanujds/wiley-c392/assets/42864715/44fed24b-9dc4-4dc2-abb1-54aa899097ce)
+
