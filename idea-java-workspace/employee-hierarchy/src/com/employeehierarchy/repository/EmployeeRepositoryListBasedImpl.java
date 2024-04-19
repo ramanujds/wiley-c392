@@ -14,10 +14,8 @@ public class EmployeeRepositoryListBasedImpl implements EmployeeRepository {
         employees = new ArrayList<>();
     }
 
-    public void saveEmployee(Employee employee) throws RuntimeException {
+    public void saveEmployee(Employee employee) {
         // write logic to validate employee
-        if(employee==null||employee.getName() == null ||employee.getId() < 0|| employee.getEmail() == null || employee.getSalary() < 0)
-            throw new RuntimeException("Employee object cannot be null");
         // throw RuntimeException/Exception if
         // any of the rules aren't followed
         employees.add(employee);
