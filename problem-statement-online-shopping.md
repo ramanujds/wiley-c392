@@ -20,4 +20,6 @@ Create a simplified online shopping system in Java, incorporating fundamental co
 4. **User Input and Exception Handling:**
     - In the testing phase, simulate user input for adding electronics and clothing to the shopping cart.
     - Implement exception handling to ensure valid inputs for product creation (e.g., non-empty product name, positive product ID).
+    - Throw DuplicateProductIDException when user tries to add product with similar id
+    - Add deleteProduct(int id) and throw an exception ProductNotFoundException if the product is not available;
 
