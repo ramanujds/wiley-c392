@@ -1,5 +1,6 @@
 package com.employeehierarchy;
 
+import com.employeehierarchy.InvalidEmployeeInfoException.InvalidEmployeeInfoException;
 import com.employeehierarchy.model.*;
 import com.employeehierarchy.repository.EmployeeRepository;
 import com.employeehierarchy.repository.EmployeeRepositoryDBImpl;
@@ -19,8 +20,12 @@ public class EmployeeHierarchyProgram {
 
         EmployeeRepository repository = new EmployeeRepositoryListBasedImpl();
 
-        repository.saveEmployee(employee1);
-        repository.saveEmployee(employee2);
+        try{
+            repository.saveEmployee(employee1);
+            repository.saveEmployee(employee2);
+        }catch (InvalidEmployeeInfoException e){
+            System.err.println("Error:"+e);
+        }
 
         repository.getAllEmployees().forEach(e-> e.showEmployeeInfo());
 
