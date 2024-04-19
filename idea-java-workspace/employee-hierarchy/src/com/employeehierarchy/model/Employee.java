@@ -6,12 +6,22 @@ public abstract class Employee {
     private String name;
     private String email;
     private float salary;
+    private Address address;
 
-    public Employee(int id, String name, String email, float salary) {
+    public Employee(int id, String name, String email, float salary, Address address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.salary = salary;
+        this.address=address;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Employee(){

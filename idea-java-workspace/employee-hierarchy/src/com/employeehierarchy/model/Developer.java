@@ -16,8 +16,8 @@ public abstract class Developer extends Employee {
 
     }
 
-    public Developer(int id, String name, String email, float salary, String programmingLanguage){
-        super(id,name,email,salary);
+    public Developer(int id, String name, String email, float salary,Address address, String programmingLanguage){
+        super(id,name,email,salary,address);
         this.programmingLanguage = programmingLanguage;
     }
 
