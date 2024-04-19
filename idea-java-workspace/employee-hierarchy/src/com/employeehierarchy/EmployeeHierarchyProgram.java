@@ -19,8 +19,12 @@ public class EmployeeHierarchyProgram {
 
         EmployeeRepository repository = new EmployeeRepositoryListBasedImpl();
 
-        repository.saveEmployee(employee1);
-        repository.saveEmployee(employee2);
+        try{
+            repository.saveEmployee(employee1);
+            repository.saveEmployee(employee2);
+        }catch (RuntimeException e){
+            System.out.println("Error:"+e);
+        }
 
         repository.getAllEmployees().forEach(e-> e.showEmployeeInfo());
 
