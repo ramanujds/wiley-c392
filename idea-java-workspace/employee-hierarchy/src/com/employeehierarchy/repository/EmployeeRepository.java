@@ -7,7 +7,7 @@ import java.util.List;
 public interface EmployeeRepository{
 
 
-    void saveEmployee(Employee employee);
+    void saveEmployee(Employee employee) throws Exception;
 
     Employee findEmployee(int id);
 

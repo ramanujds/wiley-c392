@@ -14,11 +14,18 @@ public class EmployeeRepositoryListBasedImpl implements EmployeeRepository {
         employees = new ArrayList<>();
     }
 
-    public void saveEmployee(Employee employee) {
-        if (employee.getId()<0) throw new RuntimeException("Id cannot be negative");
-        else if (employee.getName()==null || employee.getName()=="") throw new RuntimeException("Name cannot be null or empty");
-        else if (employee.getEmail()==null || employee.getEmail()=="") throw new RuntimeException("Email cannot be null");
-        else if (employee.getSalary()<0) throw new RuntimeException("Salary cannot be negative");
+    public void saveEmployee(Employee employee) throws Exception {
+        // if (employee.getId()<0) throw new RuntimeException("Id cannot be negative");
+        // if (employee.getName()==null || employee.getName()=="") throw new RuntimeException("Name cannot be null or empty");
+        // if (employee.getEmail()==null || employee.getEmail()=="") throw new RuntimeException("Email cannot be null");
+        // if (employee.getSalary()<0) throw new RuntimeException("Salary cannot be negative");
+
+        if (employee.getId()<0) throw new Exception("Id cannot be negative");
+        if (employee.getName()==null || employee.getName()=="") throw new Exception("Name cannot be null or empty");
+        if (employee.getEmail()==null || employee.getEmail()=="") throw new Exception("Email cannot be null");
+        if (employee.getSalary()<0) throw new Exception("Salary cannot be negative");
+
+
     //   else if (employee.getEmail()<0) throw Exception("Email cannot be empty");
             // write logic to validate employee
             // throw RuntimeException/Exception if
