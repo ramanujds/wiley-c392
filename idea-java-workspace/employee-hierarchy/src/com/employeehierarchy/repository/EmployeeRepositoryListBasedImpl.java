@@ -15,6 +15,9 @@ public class EmployeeRepositoryListBasedImpl implements EmployeeRepository {
     }
 
     public void saveEmployee(Employee employee) {
+        // write logic to validate employee
+        // throw RuntimeException/Exception if
+        // any of the rules aren't followed
         employees.add(employee);
     }
 

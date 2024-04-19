@@ -2,10 +2,10 @@ package com.employeehierarchy.model;
 
 public abstract class Employee {
 
-    private int id;
-    private String name;
-    private String email;
-    private float salary;
+    private int id;  // non-negative
+    private String name; // shouldn't be null or blank
+    private String email; // shouldn't be null or blank
+    private float salary; // non-negative
     private Address address;
 
     public Employee(int id, String name, String email, float salary, Address address) {
