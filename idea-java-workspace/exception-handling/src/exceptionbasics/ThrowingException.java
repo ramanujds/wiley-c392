@@ -4,7 +4,7 @@ public class ThrowingException {
 
     static int factorial(int n){
         if(n<0){
-            throw new RuntimeException("Input positive numbers only");
+            throw new NegativeNumberException("Input positive numbers only");
         }
         int f=1;
         while(n>0){
@@ -18,9 +18,10 @@ public class ThrowingException {
         try {
             System.out.println(factorial(-5));
         }
-        catch (Exception e){
-            System.out.println(e.getMessage());
+        catch (NegativeNumberException e){
+            System.err.println("Input Positive Number Only");
         }
+        System.out.println("Bye");
     }
 
 }

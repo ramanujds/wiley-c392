@@ -1,5 +1,6 @@
 package com.employeehierarchy.repository;
 
+import com.employeehierarchy.exception.InvalidEmployeeInfoException;
 import com.employeehierarchy.model.Employee;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public interface EmployeeRepository{
 
 
-    void saveEmployee(Employee employee);
+    void saveEmployee(Employee employee) ;
 
     Employee findEmployee(int id);
 

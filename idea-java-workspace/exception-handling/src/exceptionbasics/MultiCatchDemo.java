@@ -11,7 +11,7 @@ public class MultiCatchDemo {
             System.out.println("Result = "+output);
         }
         catch (ArithmeticException e){
-            System.out.println("Can't divide by zero");
+            throw new ArithmeticException("Divide by zero not allowed");
         }
 
         catch (ArrayIndexOutOfBoundsException e){

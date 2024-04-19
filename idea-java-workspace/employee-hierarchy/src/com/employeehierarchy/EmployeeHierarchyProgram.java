@@ -21,8 +21,14 @@ public class EmployeeHierarchyProgram {
 
         repository.saveEmployee(employee1);
         repository.saveEmployee(employee2);
+//        repository.saveEmployee(employee1);
 
-        repository.getAllEmployees().forEach(e-> e.showEmployeeInfo());
+        int id1 = 101;
+        System.out.println(repository.findEmployee(id1));
+        int id2 = 108;
+        System.out.println(repository.findEmployee(id2));
+
+//        repository.getAllEmployees().forEach(e-> e.showEmployeeInfo());
 
 //        switch (employee){
 //            case Manager m -> m.scheduleMeeting();
