@@ -4,10 +4,10 @@ public class Person {
      int age;
     static String country;
 
-    static {
-        System.out.println("Initializing Static Fields for Person");
-        country = "India";
-    }
+//    static {
+//        System.out.println("Initializing Static Fields for Person");
+//        country = "India";
+//    }
 
     public static void display(){
         System.out.println("Display() From Person");

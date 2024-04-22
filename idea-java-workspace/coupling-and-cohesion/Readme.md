@@ -17,6 +17,37 @@ public class Book {
 // Inventory class representing the inventory management component
 public class Inventory {
     private List<Book> books;
+    
+    // Methods related to inventory management
+    
+    public void addBook(Book book) {
+        
+    }
+    
+    public void removeBook(Book book) {
+        
+    }
+    
+    public void displayInventory() {
+        
+    }
+    
+    public Book findBookByTitle(String title) {
+        
+    }
+    
+    public List<Book> findBooksByAuthor(String author) {
+        
+    }
+    
+    public List<Book> findBooksByPriceRange(double minPrice, double maxPrice) {
+        
+    }
+    
+    
+    
+
+
 }
 
 // ShoppingCart class representing the shopping cart component
@@ -24,6 +55,25 @@ public class ShoppingCart {
     private List<Book> items;
 
     // Methods related to shopping cart
+    
+    public double calculateTotalPrice() {
+        
+    }
+    
+    public void addItem(Book book) {
+        
+    }
+    
+    public void removeItem(Book book) {
+        
+    }
+    
+    public void displayItems() {
+        
+    }
+    
+    
+    
 }
 
 // Bookstore class representing the main application
@@ -36,8 +86,7 @@ public class Bookstore {
         // Add books to shopping cart
 
         // Display inventory and total price of items in shopping cart
-     
+   
     }
 }
 ```
-
