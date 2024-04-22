@@ -36,7 +36,7 @@ public class TextProcessingApp {
 
     // Method to reverse the text
     private static String reverseText(String text) {
-        return new StringBuilder(text).reverse().toString();
+        return new StringBuffer(text).reverse().toString();
     }
 
     // Method to remove duplicate words from the text
