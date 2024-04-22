@@ -7,28 +7,29 @@ public class TextProcessor {
 
     // Functionality: String repetition
     public static String repeatString(String str, int count) {
-
+         return    str.repeat(count);
     }
 
     // Functionality: Checking if a string is blank
     public static boolean isStringBlank(String str) {
-
+        return str.isBlank();
     }
 
     // Functionality: Extracting lines from a multi-line string
     public static void extractLines(String multiLineStr) {
 
+        multiLineStr.lines().forEach(System.out::println);
     }
 
     // Functionality: String formatting
     public static String formatString(String format, Object... args) {
-
+            return format.formatted(args);
     }
 
 
     // Functionality: String indentation
     public static String indentString(String str, int n) {
-
+        return  str.indent(n);
     }
 
 
