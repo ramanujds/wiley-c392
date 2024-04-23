@@ -27,11 +27,13 @@ public class SerializationExample {
 
     public static void main(String[] args) {
 
-//        Person person = new Person("John","Delhi",45);
-//
-//        serializeObject(person);
+        Person person = new Person("John","Delhi",45,"pass1234");
+        System.out.println("Before Serialization");
+        System.out.println(person);
+        serializeObject(person);
 
-        Person person = (Person) deSerializeObject("Person.ser");
+        person = (Person) deSerializeObject("Person.ser");
+        System.out.println("After Serialization");
         System.out.println(person);
 
     }
