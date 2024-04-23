@@ -1,7 +1,8 @@
 
 package cart;
 
-public class Electronics extends Product {
+
+public class Electronics extends Product{
 
     String brand;
     String warrantyPeriod;

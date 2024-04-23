@@ -1,9 +1,10 @@
 package cart;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable{
     ArrayList<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {
@@ -38,7 +39,7 @@ public class ShoppingCart {
                             sc.next(), sc.next());
                     cart.addProduct(electronicsProduct);
                     break;
-                case 2:
+                case 2: 
                     System.out.println(
                             "Enter product name, product id, product price, quantity in stock, size, material");
                     Product clothingProduct = new Clothing(sc.next(), sc.nextInt(), sc.nextDouble(), sc.nextInt(),

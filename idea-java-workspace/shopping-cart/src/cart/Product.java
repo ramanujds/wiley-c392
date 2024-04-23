@@ -1,10 +1,18 @@
 package cart;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
+    private static final long serialVersionUID = -5863116567413155434L;
+    
     String productName;
     Integer productId;
     Double price;
     Integer quantityInStock = 0;
+
+    public Product() {
+        // No-arg constructor
+    }
 
     public Product(String productName, Integer productId, Double price, Integer quantityInStock) {
         this.productName = productName;

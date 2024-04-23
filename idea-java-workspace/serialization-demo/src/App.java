@@ -27,21 +27,27 @@ public class App {
     public static Object deSerializeObject(String filename){
         try(InputStream inputStream = new FileInputStream(filename);
         ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
+            System.out.println(objectInputStream);
             return objectInputStream.readObject();
         }
         catch (Exception ex){
             throw new RuntimeException(ex.getMessage());
+            // System.out.println(ex.getMessage());
         }
     }
  
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
         Product product1=new Clothing("Jeans",123,500.0,50,36,"Cotton");
         Product product2=new Electronics("TV", 654, 650000.0, 5, "Sony", "6 months");
+        ShoppingCart sc=null;
         ShoppingCart shoppingCart=new ShoppingCart();
         shoppingCart.addProduct(product1);
         shoppingCart.addProduct(product2);
         serializeObject(shoppingCart);
+        Object obi=(Object)deSerializeObject("Person.ser");
+        // sc=(ShoppingCart)deSerializeObject("Person.ser");
+        ShoppingCart sci=(ShoppingCart)obi;
+        sci.display();
 
         
     }
