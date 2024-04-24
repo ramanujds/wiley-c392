@@ -6,7 +6,7 @@ public class SerializationExample {
 
     public static void serializeObject(Object object) {
        try(OutputStream outputStream = new FileOutputStream("Person.ser");
-           ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)){
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)){
             objectOutputStream.writeObject(object);
        }
        catch (IOException ex){
