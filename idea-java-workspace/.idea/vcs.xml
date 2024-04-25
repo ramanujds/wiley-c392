@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/files-and-io/src/charstreams/wiley-c392" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/static-fields-and-methods/src/accountmanagement/wiley-c392" vcs="Git" />
   </component>
 </project>
