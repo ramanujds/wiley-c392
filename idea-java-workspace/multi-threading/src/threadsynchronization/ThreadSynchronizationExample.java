@@ -55,42 +55,42 @@ class BankAccount {
 
 }
 
-class DepositThread extends Thread {
-    private BankAccount account;
-    private double depositAmount;
-
-    public DepositThread(BankAccount account, double depositAmount) {
-        this.account = account;
-        this.depositAmount = depositAmount;
-    }
-
-    public void run() {
-        account.deposit(depositAmount);
-    }
-}
-
-class WithdrawThread extends Thread {
-    private BankAccount account;
-    private double withdrawAmount;
-
-    public WithdrawThread(BankAccount account, double withdrawAmount) {
-        this.account = account;
-        this.withdrawAmount = withdrawAmount;
-    }
-
-    public void run() {
-        account.withdraw(withdrawAmount);
-    }
-}
+//class DepositThread extends Thread {
+//    private BankAccount account;
+//    private double depositAmount;
+//
+//    public DepositThread(BankAccount account, double depositAmount) {
+//        this.account = account;
+//        this.depositAmount = depositAmount;
+//    }
+//
+//    public void run() {
+//        account.deposit(depositAmount);
+//    }
+//}
+//
+//class WithdrawThread extends Thread {
+//    private BankAccount account;
+//    private double withdrawAmount;
+//
+//    public WithdrawThread(BankAccount account, double withdrawAmount) {
+//        this.account = account;
+//        this.withdrawAmount = withdrawAmount;
+//    }
+//
+//    public void run() {
+//        account.withdraw(withdrawAmount);
+//    }
+//}
 
 public class ThreadSynchronizationExample {
 
     public static void main(String[] args) {
         BankAccount account = new BankAccount(0);
 
-        WithdrawThread withdrawThread = new WithdrawThread(account,5000);
-        DepositThread thread1 = new DepositThread(account, 5000);
-        DepositThread thread2 = new DepositThread(account, 2000);
+        Thread withdrawThread = new Thread(()->account.withdraw(5000));
+        Thread thread1 = new Thread(()->account.deposit(5000));
+        Thread thread2 = new Thread(()->account.deposit(2000));
 
         withdrawThread.start();
         thread1.start();
