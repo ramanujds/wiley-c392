@@ -27,8 +27,9 @@ public class EmailParsing {
 
         List<List<String>> emailsList = new ArrayList<>(map.values());
 
+        int max = emailsList.stream().map(List::size).max(Integer::compare).get();
 
-        for(int i=0; i<3; i++){
+        for(int i=0; i<max; i++){
             for (List<String> strings : emailsList) {
                 String email = i < strings.size() ? strings.get(i) : "";
                 System.out.printf("%-30s", email);
