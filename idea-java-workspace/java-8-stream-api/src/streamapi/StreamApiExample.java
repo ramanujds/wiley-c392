@@ -14,7 +14,7 @@ public class StreamApiExample {
 
         // map - double the elements
 
-        List<Integer> output = nums.stream().filter(e -> e > 0)
+        List<Integer> output = nums.parallelStream().filter(e -> e > 0)
                                              .map(e -> e * e)
                                              .toList();
 
