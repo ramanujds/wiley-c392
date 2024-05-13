@@ -204,10 +204,17 @@ select brand, avg(price) as 'average price' from laptops group by brand order by
 
 -- add a coulmn dob to trainees table
 
+ALTER TABLE trainees ADD dob DATE;
 
 -- DML
 
 -- add values to dob column for all the trainees
+
+update trainees set dob = '2003-01-01' where year(dob)=2023;
+
+
+
+
 
 -- update data on those mapping tables
 
@@ -216,20 +223,45 @@ select brand, avg(price) as 'average price' from laptops group by brand order by
 
 -- find the trainees who got laptops from HP
 
+select * from trainees where laptop_id in (select id from laptops where brand='HP');
+
 -- find the trainees who got laptops from HP and price is more than 1 Lakh
 
 -- date realted queries
 
--- find the trainees who born in 2000s
+-- find the trainees who born in 2000
+
+select * from trainees where dob between '2000-01-01' and '2000-12-31';
+
+select * from trainees where extract(year from dob)=2000;
+
+select * from trainees where year(dob)=2000;
+ 
+select * from trainees where dob like '2000%';
 
 -- find the trainees who joined in 2024
 
--- find the trainees who joined in between 2020 and 2024
+
+
+-- find the trainees who borned in between 2000 and 2004
+
+select * from trainees where year(dob) between 2000 and 2004;
 
 -- find the trainees who joined in the month of january
 
--- find the most ecxperienced trainee
+-- find the youngest trainee
 
--- find the trainees who joined in the month of january and got laptops from HP
+-- find age of each trainee
+
+select *, floor(datediff(now(),dob)/365) as 'age(years)', mod(dob,365) as 'age(days)' from trainees;
+
+
+
+-- find the trainees who borned in the month of january
+
+select * from trainees where extract(month from dob)=1;
+
+
+
 
 
