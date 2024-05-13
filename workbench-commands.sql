@@ -178,7 +178,58 @@ FROM laptops
 GROUP BY brand 
 HAVING average_price > 100000;
 
+-- order the brands based on their avg price
+
+select brand, avg(price) as 'average price' from laptops group by brand order by 2;
+
+
+
 
 -- DCL - GRANT, REVOKE
 
 -- TCL - COMMIT, ROLLBACK, SAVEPOINT
+
+
+
+
+-- exercises
+
+-- DDL
+
+-- establish a one to many relationship between trainees and laptops without using a third table
+
+-- establish a one to many relationship between trainees and laptops using a third table
+
+-- establish a many to many relationship between trainees and laptops using a third table
+
+-- add a coulmn dob to trainees table
+
+
+-- DML
+
+-- add values to dob column for all the trainees
+
+-- update data on those mapping tables
+
+
+-- DQL
+
+-- find the trainees who got laptops from HP
+
+-- find the trainees who got laptops from HP and price is more than 1 Lakh
+
+-- date realted queries
+
+-- find the trainees who born in 2000s
+
+-- find the trainees who joined in 2024
+
+-- find the trainees who joined in between 2020 and 2024
+
+-- find the trainees who joined in the month of january
+
+-- find the most ecxperienced trainee
+
+-- find the trainees who joined in the month of january and got laptops from HP
+
+
