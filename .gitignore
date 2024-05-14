@@ -1,1 +1,18 @@
 /java-playground/Program.class
+
+# ignore all the .class files
+*.class
+
+# ignore all the file in idea folder
+
+**/.idea/*
+
+# ignore all the gitignore file
+
+.gitignore
+.iml
+.idea
+idea-java-workspace/code-optimization/code-optimization.iml
+idea-java-workspace/exception-handling/test.txt
+idea-java-workspace/solid-principles/solid-principles.iml
+idea-java-workspace/.DS_Store
