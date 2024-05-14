@@ -31,6 +31,9 @@ alter table trainees add constraint fk_laptop_id foreign key(laptop_id) referenc
 
 alter table laptops add brand varchar(20);
 
+alter table trainees add team_lead int;
+
+
 
 -- DML - INSERT, UPDATE, DELETE
 
@@ -75,7 +78,7 @@ insert into trainees(trainee_name, email, location,laptop_id) values
 insert into laptops(id,laptop_name,price) values (7,'HP 2222XX', 40000); 
 insert into trainees(trainee_name,email,location,laptop_id) values ('Divyansh Kaushik','divyanshkk@gmail.com','Ghaziabad',7);
 
-INSERT INTO laptops (laptop_name, price) VALUES ('Lenovo Gaming', 60000);
+INSERT INTO laptops (laptop_name, price,brand) VALUES ('HP Spectre', 250000, 'HP');
 
 INSERT INTO trainees(trainee_name,email,location,laptop_id) values('Shreyash Mahalle','Shreyash@gmail.com','Amravati',8);
 
@@ -95,6 +98,8 @@ rollback to p1;
 commit;
 
 set autocommit=true;
+
+update trainees set team_lead=12 where team_lead is null;
 
 -- DQL - SELECT
 
@@ -263,5 +268,87 @@ select * from trainees where extract(month from dob)=1;
 
 
 
+-- joins
+
+-- inner join
+
+select t.*, l.* from trainees t INNER join laptops l on t.laptop_id=l.id;
+
+select t.*, l.* from trainees t, laptops l WHERE t.laptop_id=l.id;
+
+-- outer join
+-- left join
+
+select t.*, l.* from trainees t left join laptops l on t.laptop_id=l.id;
+
+select t.*, l.* from laptops t right join trainees l on t.laptop_id=l.id;
+
+-- right join
+select t.*, l.* from trainees t right join laptops l on t.laptop_id=l.id;
+
+-- find out the unallocated laptops
+
+SELECT l.* FROM laptops l
+LEFT JOIN trainees t ON l.id = t.laptop_id
+WHERE t.laptop_id is null;
+
+select * from laptops where id not in (select laptop_id from laptops l join trainees t on t.laptop_id = l.id);
 
 
+-- find the trainees with hp laptop
+
+select trainee_name, laptop_name from trainees join laptops on trainees.laptop_id = laptops.id where laptops.brand='HP';
+
+
+-- find the trainees with laptop price>100000
+
+select trainee_name, laptop_name, price from trainees join laptops on laptop_id = laptops.id where price>=100000;
+
+-- count the no of trainees for each brand of laptops 
+
+select l.brand, count(l.brand) as no_for_brands from trainees t join laptops l on
+t.laptop_id = l.id group by l.brand;
+
+-- find total trainees who got hp laptop 
+
+select l.brand, count(l.brand) as no_for_brands from trainees t join laptops l on
+t.laptop_id = l.id where brand='HP';
+
+
+-- find the trainee names along with team leads names
+
+select tr.trainee_name, tl.trainee_name from trainees tr join trainees tl on tr.team_lead=tl.id;
+
+
+-- show the details of the team leads
+
+select distinct tl.trainee_name, tl.id, tl.location from  trainees tr join trainees tl on tr.team_lead=tl.id;
+
+select * from trainees where id in (select team_lead from trainees);
+
+-- show the details of the team leads along with the team size
+
+select tl.trainee_name, tl.id, tl.location, count(*) 
+from trainees tr join trainees tl on tr.team_lead=tl.id
+group by tl.trainee_name, tl.id;
+
+
+
+
+-- practice on joins
+
+-- find the trainees who got laptops from HP
+
+-- find the trainees who got laptops from HP and price is more than 1 Lakh
+
+-- find the trainees whith the costliest laptop
+
+-- find the brand which most number of trainees got
+
+-- find the trainees who got multiple laptops
+
+-- find the trainees whose team leads are from pune
+
+-- find the trainees who belong to the same location as their team leads
+
+-- find the brands used by diffent team leads
