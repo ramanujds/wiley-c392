@@ -292,7 +292,9 @@ SELECT l.* FROM laptops l
 LEFT JOIN trainees t ON l.id = t.laptop_id
 WHERE t.laptop_id is null;
 
-select * from laptops where id not in (select laptop_id from laptops l join trainees t on t.laptop_id = l.id);
+select id from laptops;
+
+select * from laptops where id not in(select laptop_id from trainees where laptop_id is not null);
 
 
 -- find the trainees with hp laptop
@@ -304,10 +306,17 @@ select trainee_name, laptop_name from trainees join laptops on trainees.laptop_i
 
 select trainee_name, laptop_name, price from trainees join laptops on laptop_id = laptops.id where price>=100000;
 
+Select * from trainees where laptop_id  in
+(select id from laptops where price > 100000);
+
+
 -- count the no of trainees for each brand of laptops 
 
 select l.brand, count(l.brand) as no_for_brands from trainees t join laptops l on
 t.laptop_id = l.id group by l.brand;
+
+select distinct brand,(select count(t.id) from trainees t where t.laptop_id in 
+(select id from laptops where brand=l.brand)) as 'count' from laptops l; 
 
 -- find total trainees who got hp laptop 
 
@@ -332,23 +341,104 @@ select tl.trainee_name, tl.id, tl.location, count(*)
 from trainees tr join trainees tl on tr.team_lead=tl.id
 group by tl.trainee_name, tl.id;
 
+select distinct tl.trainee_name,(select count(tr.id) 
+from trainees tr where tr.team_lead=tl.id) as 'Team Size'
+from trainees tl where id in(select team_lead from trainees);
 
+
+select * from trainees order by id limit 0,2;
 
 
 -- practice on joins
 
 -- find the trainees who got laptops from HP
 
+select t.id, t.trainee_name, l.laptop_name, l.brand from trainees t join laptops l on t.laptoP_id=l.id where l.brand='HP';
+
 -- find the trainees who got laptops from HP and price is more than 1 Lakh
+
+select t.id, t.trainee_name, l.laptop_name, l.brand, l.price from trainees t join laptops l 
+on t.laptoP_id=l.id where l.brand='HP' AND l.price>=100000;
+
+
 
 -- find the trainees whith the costliest laptop
 
+select * from trainees t join laptops l on t.laptop_id=l.id order by price desc limit 1;
+
+SELECT trainee_name FROM trainees
+WHERE laptop_id = (
+        SELECT id
+        FROM laptops where id in(select laptop_id from trainees)
+        ORDER BY price DESC
+        LIMIT 1
+);
+
+SELECT *
+FROM trainees
+WHERE laptop_id IN (
+    SELECT id
+    FROM laptops
+    WHERE price = (
+        SELECT MAX(price)
+        FROM laptops where id in(select laptop_id from trainees)
+    ) 
+);
+
+
 -- find the brand which most number of trainees got
+
+select l.brand,count(brand) as laptop_count from trainees t join laptops l 
+on t.laptop_id=l.id group by l.brand order by laptop_count desc limit 1;
+
+SELECT brand
+FROM (
+    SELECT brand, COUNT(id) AS trainee_count
+    FROM laptops
+    GROUP BY brand
+) AS brand_counts
+ORDER BY trainee_count DESC
+LIMIT 1;
 
 -- find the trainees who got multiple laptops
 
+
+
 -- find the trainees whose team leads are from pune
+
+select tr.trainee_name, tl.trainee_name, tl.location from trainees tr join trainees tl
+ on tr.team_lead=tl.id where tl.location='Pune';
 
 -- find the trainees who belong to the same location as their team leads
 
+select tr.trainee_name, tl.trainee_name, tl.location from trainees tr join trainees tl
+ on tr.team_lead=tl.id where tl.location=tr.location;
+
 -- find the brands used by diffent team leads
+
+select distinct tl.trainee_name, l.brand
+from trainees tl join trainees tr
+on tr.team_lead = tl.id
+join laptops l on tl.laptop_id=l.id;
+
+
+-- subqueries
+
+-- find trainees who got hp laptop
+
+-- first find the ids of hp laptops
+
+select id from laptops where brand='HP';
+
+-- find the trainees with laptop_id in the output of the previous query
+
+select trainee_name from trainees where laptop_id in(select id from laptops where brand='HP');
+
+-- creating tables with subquery
+
+create table pune_team as (select * from trainees where location='Pune');
+
+select * from pune_team;
+
+-- select brand, count(*) from laptops where brand in('HP','Apple') group by brand having avg(price)>50000 order by 2 desc;
+
