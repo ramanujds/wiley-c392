@@ -497,6 +497,60 @@ create fulltext index idx_trainee_name_ft on trainees(trainee_name);
 
 -- clustered index and non-clustered index
 
+-- wildcards
+
+-- find the trainees whose name starts with 'A'
+
+select * from trainees where trainee_name like 'A%';
+
+-- find the trainees whose name ends with 'a'
+
+select * from trainees where trainee_name like '%a';
+
+-- find the trainees whose name contains 'a'
+
+select * from trainees where trainee_name like '%a%';
+
+-- find the trainees whose name starts with 'A' and ends with 'a'
+
+select * from trainees where trainee_name like 'A%a';
+
+-- find the trainees whose name starts with 'A' and ends with 'a' and has 6 characters
+
+select * from trainees where trainee_name like 'A____a';
+
+-- find the trainees whose name starts with 'A' and ends with 'a' and has atleast 6 characters
+
+select * from trainees where trainee_name like 'A%a' and length(trainee_name)>=6;
+
+
+-- transactions
+
+set autocommit=0;
+
+DELIMITER //
+CREATE PROCEDURE usp_test_transaction()
+BEGIN
+start transaction;
+savepoint p2;
+update trainees set laptop_id=null where id=16;
+
+update trainees set laptop_id=11 where id=11;
+
+IF (select laptop_id from trainees where id=11) is null THEN
+    ROLLBACK to p2;
+ELSE
+    COMMIT;
+END IF;
+end;
+
+DELIMITER ;
+
+drop procedure usp_test_transaction;
+
+set autocommit=1;
+
+call usp_test_transaction;
 
 -- exercise queries
 
@@ -528,3 +582,11 @@ create fulltext index idx_trainee_name_ft on trainees(trainee_name);
 
 
 
+
+
+create table pune_locations as select * from trainees where location='Pune';
+
+
+-- find the laptops which are being alocated to the trainees
+
+select * from laptops where exists(select laptop_id from trainees where id=7);
