@@ -442,3 +442,34 @@ select * from pune_team;
 
 -- select brand, count(*) from laptops where brand in('HP','Apple') group by brand having avg(price)>50000 order by 2 desc;
 
+
+-- views 
+
+-- create a view with the trainees who got laptops
+
+create view trainees_with_laptop as
+select * from trainees where laptop_id is not null;
+
+
+INSERT INTO trainees_with_laptop(trainee_name,email,location,laptop_id) values('Ludhiya Gurugari','ludhiya@gmail.com','AP',12);
+
+
+-- create a view to show the details of the team leads along with the team size
+
+create view team_leads_details as 
+select tl.trainee_name, tl.id, tl.location, count(*) 
+from trainees tr join trainees tl on tr.team_lead=tl.id
+group by tl.trainee_name, tl.id;
+
+
+-- create a view to display the id, trainee_name, dob
+
+create view simplified_trainees as select id, trainee_name, dob from trainees;
+
+
+-- creating index
+
+select * from trainees where id=12;
+
+create index idx_trainee_name on trainees(trainee_name);
+
