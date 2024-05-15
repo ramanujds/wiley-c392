@@ -473,3 +473,58 @@ select * from trainees where id=12;
 
 create index idx_trainee_name on trainees(trainee_name);
 
+
+-- single column index
+
+create index idx_trainee_name on trainees(trainee_name);
+
+-- drop the index
+
+drop index idx_trainee_name on trainees;
+
+-- unique index
+
+create unique index idx_trainee_email on trainees(email);
+
+-- composite index
+
+create index idx_location_team_lead on trainees(location,team_lead);
+
+-- fulltext index
+
+create fulltext index idx_trainee_name_ft on trainees(trainee_name);
+
+
+-- clustered index and non-clustered index
+
+
+-- exercise queries
+
+-- find the resturants with location
+
+-- find the menu items with price
+
+-- find the orders with order date
+
+-- find the orders in the month of january
+
+-- find most ordered item
+
+-- find the resturants with most orders
+
+-- find the resturants with most orders in the month of january
+
+-- find most ordered items of each resturant
+
+-- find customers who ordered in the month of january
+
+-- find the customers who ordered most
+
+-- top 5 ordered items
+
+-- top 5 resturants with most orders
+
+-- top 5 customers with most orders
+
+
+
