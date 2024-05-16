@@ -552,6 +552,71 @@ set autocommit=1;
 
 call usp_test_transaction;
 
+
+-- stored procedures
+
+delimiter //
+create procedure getLaptopsByBrand(IN brandname varchar(20))
+begin
+	select * from laptops where brand=brandname;
+end //
+delimiter ;
+
+call getLaptopsByBrand('Apple');
+
+
+-- create a procedure to get the count of the trainees by location
+
+delimiter //
+create procedure getTraineesCountByLocation(IN loc varchar(50), out total int)
+begin
+	select count(id) into total from trainees where location=loc;
+end //
+delimiter ;
+
+call getTraineesCountByLocation('Pune',@total);
+select @total;
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+-- functions
+
+delimiter //
+create function calculateDiscount(brandname varchar(20),price float) returns float
+begin
+    declare discount float default 0;
+	if brandname='HP' then
+		set discount = .15*price;
+	elseif brandname='Apple' then
+		set discount = .1*price;
+	end if;
+    return discount;
+end //
+
+delimiter ;
+
+select id, laptop_name, price, calculateDiscount(brand,price) as discounts from laptops;
+
+drop function calculateDiscount;
+
+-- differences between procedures and functions
+-- procedures dont return values directly while function does
+-- procedures must be call using a call statement while a function can be used SQL statement
+-- procedures can have TCL commands while functions cannot. 
+
+
+  
+-- exercise on stored procedures
+
+-- create a procedure to get the count of the trainees by team lead
+
+-- create a procedure to get the all the trainees who got laptops from the input brand
+
+-- create a function to get the age of the trainee based on the dob
+
+
+
+
 -- exercise queries
 
 -- find the resturants with location
