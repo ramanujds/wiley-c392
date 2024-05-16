@@ -614,8 +614,44 @@ drop function calculateDiscount;
 
 -- create a function to get the age of the trainee based on the dob
 
+delimiter //
+CREATE FUNCTION CalculateAge(dob DATE) RETURNS INT
+BEGIN
+    DECLARE age INT;
+    SET age = DATEDIFF(now(), dob)/365;
+    RETURN age;
+END //
+
+delimiter ;
+
+drop function CalculateAge;
+
+select trainee_name, dob, CalculateAge(dob) as 'Age' from trainees;
 
 
+-- triggers
+
+delimiter //
+create trigger update_laptop before update
+on laptops
+for each row
+begin
+  if new.price<0 then
+    SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Error : Price cannot be negative', MYSQL_ERRNO = 1001;
+  end if;
+end //
+delimiter ;
+
+drop trigger update_laptop;
+
+-- exercise on triggers
+
+-- create a trigger to update the team lead of the trainee based on the location
+
+-- create a trigger to update the laptop_id of the trainee based on laptops that are available
+
+-- create a trigger to save the traiees in a backup table before deleting them
 
 -- exercise queries
 
@@ -655,3 +691,6 @@ create table pune_locations as select * from trainees where location='Pune';
 -- find the laptops which are being alocated to the trainees
 
 select * from laptops where exists(select laptop_id from trainees where id=7);
+
+
+
