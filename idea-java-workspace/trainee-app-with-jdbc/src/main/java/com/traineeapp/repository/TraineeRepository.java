@@ -1,5 +1,6 @@
 package com.traineeapp.repository;
 
+import com.traineeapp.exception.RecordNotFoundException;
 import com.traineeapp.model.Trainee;
 
 import java.sql.SQLException;
@@ -8,16 +9,16 @@ import java.util.Optional;
 
 public interface TraineeRepository {
 
-    public Trainee saveTrainee(Trainee trainee) throws SQLException;
+    public Trainee saveTrainee(Trainee trainee);
 
-    public Optional<Trainee> getTraineeById(int id) throws SQLException;
+    public Optional<Trainee> getTraineeById(int id) throws RecordNotFoundException;
 
-    public Optional<Trainee> getTraineeByName(String traineeName) throws SQLException;
+    public Optional<Trainee> getTraineeByName(String traineeName) throws RecordNotFoundException;
 
-    public List<Trainee> getAllTrainees() throws SQLException;
+    public List<Trainee> getAllTrainees();
 
-    public void deleteTrainee(int id) throws SQLException;
+    public void deleteTrainee(int id) throws RecordNotFoundException;
 
-    public Trainee updateTrainee(int id, Trainee newTrainee) throws SQLException;
+    public Trainee updateTrainee(int id, Trainee newTrainee) throws RecordNotFoundException;
 
 }

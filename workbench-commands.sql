@@ -736,5 +736,5 @@ create table pune_locations as select * from trainees where location='Pune';
 
 select * from laptops where exists(select laptop_id from trainees where id=7);
 
-
+select * from trainees;
 
