@@ -12,13 +12,12 @@ public class TraineeApplication {
 
     public static void main(String[] args) {
 
-        Trainee trainee = new Trainee("Ajay Sunil","ajay@yahoo.com",
-                "AP", LocalDate.parse("1999-10-10"));
 
         TraineeRepository traineeRepository = new TraineeRepositoryImpl();
 
         try {
-            traineeRepository.saveTrainee(trainee);
+            traineeRepository.deleteTrainee(25);
+            traineeRepository.getAllTrainees().forEach(System.out::println);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
