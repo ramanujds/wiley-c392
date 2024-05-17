@@ -46,11 +46,11 @@ insert into trainees(trainee_name,email,location,laptop_id) values ('Apeksha Ard
 insert into trainees(trainee_name,email,location) values ('Yuvraj Singh','yuv@yahoo.com','Pune');
 
 update trainees set laptop_id=3 where id=4;
-insert into trainees(trainee_name,email,location,laptop_id) values ('Yuvraj Singh','yuv@yahoo.com','Pune',1);
+insert into trainees(trainee_name,email,location) values ('Yuvraj Singh','yuv@yahoo.com','Pune');
 insert into trainees(trainee_name,email,location,laptop_id) values ('Apeksha Arde','apeksha@yahoo.com','Pune',2);
 insert into trainees(trainee_name,email,location,laptop_id) values ('Saurajit Sarkar','saurajit@yahoo.com','Kolkata',3);
 
-insert into trainees(trainee_name,email,location) values ('Sravanu N','sravani@yahoo.com','AP'),
+insert into trainees(trainee_name,email,location) values ('Sravani N','sravani@yahoo.com','AP'),
 														 ('Gaurav Mandal','gaurav@yahoo.com','Hyderabad'),
                                                          ('Patyush Pandit','pratyush@gmail.com','Pandit');
                                                          
@@ -651,7 +651,51 @@ drop trigger update_laptop;
 
 -- create a trigger to update the laptop_id of the trainee based on laptops that are available
 
+
+DELIMITER //
+CREATE TRIGGER update_laptop_id
+BEFORE INSERT ON trainees
+FOR EACH ROW
+BEGIN
+    DECLARE available_laptop_id int;
+    
+    -- Find an available laptop
+    SELECT id INTO available_laptop_id
+    FROM laptops
+    WHERE id NOT IN (SELECT laptop_id FROM trainees WHERE laptop_id IS NOT NULL)
+    LIMIT 1;
+    
+    -- Update the trainee's laptop_id
+    SET new.laptop_id=available_laptop_id;
+END //
+delimiter ;
+
+drop trigger update_laptop_id;
+
+insert into trainees(trainee_name,email,location) values ('Nadiya Syed','nadiya@yahoo.com','AP');
+
 -- create a trigger to save the traiees in a backup table before deleting them
+
+
+
+CREATE TABLE trainees_backup LIKE trainees;
+
+desc trainees_backup;
+
+select * from trainees_backup;
+
+drop trigger create_backup_table;
+
+delimiter //
+create trigger backup_deleted_trainees before delete
+on trainees
+for each row
+begin
+	INSERT INTO trainees_backup VALUES(OLD.id,OLD.trainee_name,OLD.email,OLD.location,OLD.laptop_id,OLD.dob,OLD.team_lead);  
+end //
+delimiter ;
+
+delete from tranees where id = 7;
 
 -- exercise queries
 
