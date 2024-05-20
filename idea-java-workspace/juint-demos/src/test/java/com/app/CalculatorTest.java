@@ -5,6 +5,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,10 +41,13 @@ public class CalculatorTest {
         Assertions.assertEquals(-20,calc.add(-10,-10));
     }
 
-    @Test
-    void divideTest(){
 
-        Assertions.assertEquals(2,calc.divide(10,5));
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/test-data.csv")
+    void divideTest(int a, int b, int expected){
+
+        Assertions.assertEquals(expected,calc.divide(a,b));
 
 
     }
