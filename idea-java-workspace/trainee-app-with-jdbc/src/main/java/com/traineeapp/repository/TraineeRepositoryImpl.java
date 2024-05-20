@@ -25,7 +25,7 @@ public class TraineeRepositoryImpl implements TraineeRepository {
                 throw new RuntimeException("Failed to Save");
             }
             JdbcConnectionUtil.closeConnection();
-            return getTraineeById(trainee.getId()).orElse(null);
+            return getTraineeByName(trainee.getTraineeName()).orElse(null);
         } catch (SQLException | RecordNotFoundException ex) {
             throw new RuntimeException(ex.getMessage());
         }
