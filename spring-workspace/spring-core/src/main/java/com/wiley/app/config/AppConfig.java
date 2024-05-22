@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("app.yml")
+@PropertySource("app.properties")
 @ComponentScan(basePackages = {"com.wiley.app"})
 public class AppConfig {
 

@@ -1,10 +1,14 @@
 package com.wiley.app.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("airtel")
+@Scope("prototype")
+@Primary
 public class AirtelSim implements Sim{
 
 
@@ -15,6 +19,8 @@ public class AirtelSim implements Sim{
 
     public AirtelSim() {
         System.out.println("Airtel Sim Bean Created");
+        System.out.println("Phone No. : "+phoneNo);
+        System.out.println("Service Provider : "+serviceProvider);
     }
 
     @Override

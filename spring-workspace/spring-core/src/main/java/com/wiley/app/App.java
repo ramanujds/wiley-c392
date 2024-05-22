@@ -12,11 +12,17 @@ public class App {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Phone phone = context.getBean("phone",Phone.class);
+        Phone phone1 = context.getBean("phone",Phone.class);
 
-        phone.browseInternet();
+        phone1.setModel("iPhone 15 Pro");
 
-        phone.displayPhoneDetails();
+        phone1.browseInternet();
+
+        phone1.displayPhoneDetails();
+
+        Phone phone2 = context.getBean("phone",Phone.class);
+
+        phone2.displayPhoneDetails();
 
 
     }

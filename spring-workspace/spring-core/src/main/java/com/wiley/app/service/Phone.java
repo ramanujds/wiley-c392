@@ -1,16 +1,20 @@
 package com.wiley.app.service;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("phone")
-public class Phone {
+@Scope("prototype")
+public class Phone implements InitializingBean, DisposableBean {
+
 
 
     @Autowired
-    @Qualifier("airtel")
     private Sim sim;
 
     @Value("${phone.model}")
@@ -21,6 +25,7 @@ public class Phone {
     private float price;
 
 
+
     public Phone(Sim sim) {
         this.sim = sim;
     }
@@ -28,6 +33,16 @@ public class Phone {
     public Phone(){
         System.out.println("Phone Bean Created");
     }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("Phone Bean Initialized");
+        sim.browseInternet();
+//        System.out.println("Model : "+model);
+//        System.out.println("Brand : "+brand);
+//        System.out.println("Price : "+price);
+    }
+
 
     public void setSim(Sim sim){
         this.sim=sim;
@@ -70,5 +85,10 @@ public class Phone {
 
     public void displayPhoneDetails(){
         System.out.println(toString());
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("Phone Bean Destroyed");
     }
 }

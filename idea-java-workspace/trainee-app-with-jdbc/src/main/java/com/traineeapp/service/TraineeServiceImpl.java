@@ -3,14 +3,19 @@ package com.traineeapp.service;
 import com.traineeapp.exception.RecordNotFoundException;
 import com.traineeapp.model.Trainee;
 import com.traineeapp.repository.TraineeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TraineeServiceImpl implements TraineeService {
+
 
     private final TraineeRepository repository;
 
+    @Autowired
     public TraineeServiceImpl(TraineeRepository repository) {
         this.repository = repository;
     }
