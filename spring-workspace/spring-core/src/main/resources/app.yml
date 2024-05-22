@@ -1,0 +1,12 @@
+phone:
+  brand: Apple
+  model: iPhone 15
+  price: 75000
+
+airtel:
+  number: 8976543210
+  serviceProvider: Airtel
+
+jio:
+  number: 7956543210
+  serviceProvider: Jio

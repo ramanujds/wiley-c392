@@ -12,9 +12,11 @@ public class App {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Phone phone = context.getBean(Phone.class);
+        Phone phone = context.getBean("phone",Phone.class);
 
         phone.browseInternet();
+
+        phone.displayPhoneDetails();
 
 
     }

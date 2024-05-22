@@ -1,20 +1,18 @@
 package com.wiley.app.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component("airtel")
-public class AirtelSim implements Sim{
+@Component("jio")
+public class JioSim implements Sim{
 
-
-    @Value("${airtel.number}")
+    @Value("${jio.number}")
     private long phoneNo;
-    @Value("${airtel.serviceProvider}")
+    @Value("${jio.serviceProvider}")
     private String serviceProvider;
 
-    public AirtelSim() {
-        System.out.println("Airtel Sim Bean Created");
+    public JioSim() {
+        System.out.println("Jio Sim Bean Created");
     }
 
     @Override
@@ -34,17 +32,5 @@ public class AirtelSim implements Sim{
 
     public long getPhoneNo() {
         return phoneNo;
-    }
-
-    public void setPhoneNo(long phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public String getServiceProvider() {
-        return serviceProvider;
-    }
-
-    public void setServiceProvider(String serviceProvider) {
-        this.serviceProvider = serviceProvider;
     }
 }
