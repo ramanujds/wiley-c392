@@ -14,13 +14,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-@Slf4j
+
 @Repository
 public class TraineeRepositoryImpl implements TraineeRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
 
+    private static final org. slf4j. Logger log
+            = org. slf4j. LoggerFactory. getLogger(TraineeRepositoryImpl.class);
 
 
     @Autowired
