@@ -1,6 +1,10 @@
 spring:
   application:
     name: spring-mvc-app
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp
 
 server:
     port: 8000
