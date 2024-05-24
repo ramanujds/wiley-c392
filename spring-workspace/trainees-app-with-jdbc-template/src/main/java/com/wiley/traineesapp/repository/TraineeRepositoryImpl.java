@@ -1,7 +1,10 @@
 package com.wiley.traineesapp.repository;
 
+import com.wiley.traineesapp.exception.RecordNotFoundException;
 import com.wiley.traineesapp.model.Trainee;
+import com.wiley.traineesapp.util.TraineeRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,14 +19,7 @@ public class TraineeRepositoryImpl implements TraineeRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-   RowMapper<Trainee> rowMapper = ((rs, rowNum) -> {
-       Trainee trainee = new Trainee();
-       trainee.setId(rs.getInt("id"));
-       trainee.setName(rs.getString("trainee_name"));
-       trainee.setEmail(rs.getString("email"));
-       trainee.setLocation(rs.getString("location"));
-       return trainee;
-   });
+
 
 
     @Autowired
@@ -32,25 +28,34 @@ public class TraineeRepositoryImpl implements TraineeRepository {
     }
 
     public Trainee saveTrainee(Trainee trainee) {
-        jdbcTemplate.update("insert into trainees(trainee_name,email,location) values(?,?,?)",
+        int rowCount = jdbcTemplate.update("insert into trainees(trainee_name,email,location) values(?,?,?)",
                 trainee.getName(), trainee.getEmail(), trainee.getLocation());
-        return getTraineeByName(trainee.getName()).orElse(null);
+        if (rowCount > 0) {
+            return getTraineeByName(trainee.getName()).get();
+        }
+        return null;
     }
 
     public Optional<Trainee> getTraineeById(int id) {
-        Trainee trainee = jdbcTemplate.queryForObject("select id,trainee_name,email,location from trainees where id=" + id, rowMapper);
-        return Optional.of(trainee);
+       try {
+           Trainee trainee = jdbcTemplate.queryForObject("select * from trainees where id=" + id, new TraineeRowMapper());
+           return Optional.of(trainee);
+       }
+       catch (DataAccessException ex){
+           throw new RecordNotFoundException("Trainee with id : "+id+" Not Found");
+       }
     }
 
     public Optional<Trainee> getTraineeByName(String name) {
-      Trainee trainee =jdbcTemplate.queryForObject("""
-                select * from trainees where trainee_name='%s'
-                """.formatted(name), rowMapper);
+      Trainee trainee =jdbcTemplate.queryForObject("select * from trainees where trainee_name='"+name+"'", new TraineeRowMapper());
+        if (trainee==null){
+            throw new RecordNotFoundException("Trainee with name : "+name+" Not Found");
+        }
         return Optional.of(trainee);
     }
 
     public List<Trainee> getAllTrainees() {
-        return jdbcTemplate.query("select * from trainees", rowMapper);
+        return jdbcTemplate.query("select * from trainees", new TraineeRowMapper());
     }
 
     public void deleteTrainee(int id) {

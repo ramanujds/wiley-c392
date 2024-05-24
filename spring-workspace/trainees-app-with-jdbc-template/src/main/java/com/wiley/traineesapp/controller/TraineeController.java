@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/trainees")
 public class TraineeController {
 
     @Autowired
     private TraineeService traineeService;
+
 
 
 
