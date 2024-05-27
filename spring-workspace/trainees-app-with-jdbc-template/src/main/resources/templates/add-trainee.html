@@ -16,6 +16,7 @@
         <div class="col-md-6">
             <form action="#" th:action="@{/save-trainee}" th:object="${trainee}" method="post">
                 <div class="row">
+                    <input type="hidden" th:field="*{id}" name="id" class="form-control" id="id" placeholder="id" th:value=0>
                     <div class="form-group col-md-4">
                         <label for="name" class="col-form-label">Name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Name">

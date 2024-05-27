@@ -1,5 +1,6 @@
 package com.wiley.traineesapp.model;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Trainee {
 
+
     private int id;
+    @NotBlank(message = "Blank Not Allowed")
     private String name;
     private String email;
     private String location;
