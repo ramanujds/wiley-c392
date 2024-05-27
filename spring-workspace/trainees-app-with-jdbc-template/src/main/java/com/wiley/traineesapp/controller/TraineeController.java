@@ -18,6 +18,24 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
+
+    @GetMapping("/index")
+    public String index(Model model){
+        String message = "Welcome to Trainee Management System";
+        model.addAttribute("message",message);
+        return "index.html";
+    }
+
+    @GetMapping("/demos")
+    public String demos(Model model){
+        boolean isLoggedIn = false;
+        model.addAttribute("isLoggedIn",isLoggedIn);
+        model.addAttribute("loggedInUser","harshitha");
+        List<String> trainees = traineeService.getAllTrainees().stream().map(TraineeDto::name).toList();
+        model.addAttribute("trainees",trainees);
+        return "demos.html";
+    }
+
     @GetMapping("/view-all")
     public String viewAllTrainees(Model model){
        List<TraineeDto> trainees = traineeService.getAllTrainees();

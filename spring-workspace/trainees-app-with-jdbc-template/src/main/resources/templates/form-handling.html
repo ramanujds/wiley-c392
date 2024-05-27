@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="#{user.message}"></p>
+<form th:action="@{/submit}" th:object="${user}" method="post">
+    <input type="text" th:field="*{username}" name="username" placeholder="Enter Username">
+    <input type="password" th:field="*{password}" name="password" placeholder="Enter Password">
+    <button type="submit">Add User</button>
+</form>
+</body>
+</html>
