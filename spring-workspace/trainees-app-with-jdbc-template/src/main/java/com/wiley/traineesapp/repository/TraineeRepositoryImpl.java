@@ -75,6 +75,7 @@ public class TraineeRepositoryImpl implements TraineeRepository {
 
 
     public void deleteTrainee(int id) {
-        jdbcTemplate.update("delete from trainees where id=?", id);
+        getTraineeById(id).ifPresent((t)->jdbcTemplate.update("delete from trainees where id=?", id));
+
     }
 }

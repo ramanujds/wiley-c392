@@ -3,6 +3,7 @@ package com.wiley.traineesapp.controller;
 import com.wiley.traineesapp.dto.TraineeDto;
 import com.wiley.traineesapp.model.Trainee;
 import com.wiley.traineesapp.service.TraineeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class TraineeRestController {
 //    }
 
     @PostMapping
-    public ResponseEntity<TraineeDto> saveTrainee(@RequestBody TraineeDto traineeDto){
+    public ResponseEntity<TraineeDto> saveTrainee(@RequestBody @Valid TraineeDto traineeDto){
         TraineeDto savedTrainee = traineeService.saveTrainee(traineeDto);
         HttpStatus status;
         if(savedTrainee!=null){
