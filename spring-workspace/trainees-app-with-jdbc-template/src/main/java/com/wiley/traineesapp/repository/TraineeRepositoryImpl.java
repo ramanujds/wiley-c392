@@ -21,8 +21,8 @@ public class TraineeRepositoryImpl implements TraineeRepository {
     private final JdbcTemplate jdbcTemplate;
 
 
-    private static final org. slf4j. Logger log
-            = org. slf4j. LoggerFactory. getLogger(TraineeRepositoryImpl.class);
+    private static final org.slf4j.Logger log
+            = org.slf4j.LoggerFactory.getLogger(TraineeRepositoryImpl.class);
 
 
     @Autowired
@@ -33,7 +33,7 @@ public class TraineeRepositoryImpl implements TraineeRepository {
     public Trainee saveTrainee(Trainee trainee) {
         int rowCount = jdbcTemplate.update("insert into trainees(trainee_name,email,location) values(?,?,?)",
                 trainee.getName(), trainee.getEmail(), trainee.getLocation());
-        log.info("Record Saved : "+rowCount);
+        log.info("Record Saved : " + rowCount);
         if (rowCount > 0) {
             return getTraineeByName(trainee.getName()).get();
         }
@@ -41,21 +41,20 @@ public class TraineeRepositoryImpl implements TraineeRepository {
     }
 
     public Optional<Trainee> getTraineeById(int id) {
-       try {
-           Trainee trainee = jdbcTemplate.queryForObject("select * from trainees where id=" + id, new TraineeRowMapper());
-           log.info("Found Trainee : "+trainee.toString());
-           return Optional.of(trainee);
-       }
-       catch (DataAccessException ex){
-           log.error("Trainee with id : "+id+" Not Found");
-           throw new RecordNotFoundException("Trainee with id : "+id+" Not Found");
-       }
+        try {
+            Trainee trainee = jdbcTemplate.queryForObject("select * from trainees where id=" + id, new TraineeRowMapper());
+            log.info("Found Trainee : " + trainee.toString());
+            return Optional.of(trainee);
+        } catch (DataAccessException ex) {
+            log.error("Trainee with id : " + id + " Not Found");
+            throw new RecordNotFoundException("Trainee with id : " + id + " Not Found");
+        }
     }
 
     public Optional<Trainee> getTraineeByName(String name) {
-      Trainee trainee =jdbcTemplate.queryForObject("select * from trainees where trainee_name='"+name+"'", new TraineeRowMapper());
-        if (trainee==null){
-            throw new RecordNotFoundException("Trainee with name : "+name+" Not Found");
+        Trainee trainee = jdbcTemplate.queryForObject("select * from trainees where trainee_name='" + name + "'", new TraineeRowMapper());
+        if (trainee == null) {
+            throw new RecordNotFoundException("Trainee with name : " + name + " Not Found");
         }
         return Optional.of(trainee);
     }
@@ -64,7 +63,18 @@ public class TraineeRepositoryImpl implements TraineeRepository {
         return jdbcTemplate.query("select * from trainees", new TraineeRowMapper());
     }
 
+    public Trainee updateTrainee(int id, Trainee trainee) {
+        int rowCount = jdbcTemplate.update("UPDATE trainees SET trainee_name = ?, email = ?, location = ? WHERE id = ?", trainee.getName(), trainee.getEmail(), trainee.getLocation(), id);
+        log.info("Record Updated: " + rowCount);
+        if (rowCount == 0) {
+            throw new RecordNotFoundException("Trainee with id: " + id + " Not Found");
+        }
+        Trainee updatedTrainee = getTraineeById(id).get();
+        return updatedTrainee;
+    }
+
+
     public void deleteTrainee(int id) {
-        jdbcTemplate.update("delete from trainees where id=?",id);
+        jdbcTemplate.update("delete from trainees where id=?", id);
     }
 }

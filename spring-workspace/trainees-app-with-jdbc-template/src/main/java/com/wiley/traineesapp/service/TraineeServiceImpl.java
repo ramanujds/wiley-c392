@@ -39,4 +39,10 @@ public class TraineeServiceImpl implements TraineeService{
     public List<TraineeDto> getAllTrainees() {
         return repository.getAllTrainees().parallelStream().map(EntityDtoUtil::convertToTraineeDto).toList();
     }
+
+    @Override
+    public TraineeDto updateTrainee(int id, TraineeDto traineeDto) {
+        Trainee trainee = repository.updateTrainee(id,EntityDtoUtil.convertToTraineeEntity(traineeDto));
+        return EntityDtoUtil.convertToTraineeDto(trainee);
+    }
 }

@@ -1,5 +1,6 @@
 package com.wiley.traineesapp.repository;
 
+import com.wiley.traineesapp.dto.TraineeDto;
 import com.wiley.traineesapp.model.Trainee;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface TraineeRepository {
     public List<Trainee> getAllTrainees();
 
     public void deleteTrainee(int id);
+
+    public Trainee updateTrainee(int id, Trainee trainee);
 
 }

@@ -16,4 +16,6 @@ public interface TraineeService {
 
     public List<TraineeDto> getAllTrainees();
 
+    public TraineeDto updateTrainee(int id,TraineeDto traineeDto);
+
 }
