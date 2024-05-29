@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "trainee_data")
+@NamedQuery(name = "findByLocation", query = "from Trainee where location=:location")
 public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -48,4 +48,24 @@ public class TraineeServiceImpl implements TraineeService{
         }
         return null;
     }
+
+    @Override
+    public List<TraineeDto> searchTraineeByName(String name) {
+        return traineeRepository.findByName(name).parallelStream().map(TraineeEntityDtoUtil::convertToDto)
+                .toList();
+    }
+
+    @Override
+    public List<TraineeDto> searchTraineesByYear(int year) {
+        return traineeRepository.findByJoiningYear(year).stream().map(TraineeEntityDtoUtil::convertToDto)
+                .toList();
+    }
+
+    @Override
+    public List<TraineeDto> findTraineesByLocation(String location) {
+        return traineeRepository.findByLocation(location)
+                .parallelStream()
+                .map(TraineeEntityDtoUtil::convertToDto)
+                .toList();
+    }
 }

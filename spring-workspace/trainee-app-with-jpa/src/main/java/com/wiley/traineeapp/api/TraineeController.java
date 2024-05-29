@@ -54,5 +54,20 @@ public class TraineeController {
         return traineeService.updateTrainee(id,traineeDto);
     }
 
+    @GetMapping("/search")
+    public List<TraineeDto> searchTrainees(@RequestParam("name") String name){
+            return traineeService.searchTraineeByName(name);
+    }
+
+    @GetMapping("/year/{year}")
+    public List<TraineeDto> searchTraineesByYear(@PathVariable("year") int year){
+        return traineeService.searchTraineesByYear(year);
+    }
+
+    @GetMapping("/location/{location}")
+    public List<TraineeDto> searchTraineesByLocation(@PathVariable String location){
+        return traineeService.findTraineesByLocation(location);
+    }
+
 
 }

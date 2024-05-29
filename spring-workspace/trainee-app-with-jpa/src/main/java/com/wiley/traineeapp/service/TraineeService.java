@@ -17,4 +17,9 @@ public interface TraineeService {
 
     TraineeDto updateTrainee(int id, TraineeDto trainee);
 
+    List<TraineeDto> searchTraineeByName(String name);
+
+    List<TraineeDto> searchTraineesByYear(int year);
+
+    List<TraineeDto> findTraineesByLocation(String location);
 }
