@@ -26,5 +26,7 @@ public interface TraineeRepository extends JpaRepository<Trainee,Integer> {
     @Query(name = "findByLocation")
     public List<Trainee> findByLocation(String location);
 
+    public boolean existsByEmail(String email);
+
 
 }
