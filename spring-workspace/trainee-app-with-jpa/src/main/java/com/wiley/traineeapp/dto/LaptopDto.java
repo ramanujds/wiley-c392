@@ -1,4 +1,6 @@
 package com.wiley.traineeapp.dto;
 
-public record LaptopDto(int id, String brand, String model, float price) {
+import com.wiley.traineeapp.model.Trainee;
+
+public record LaptopDto(int id, String brand, String model, float price,TraineeDto trainee){
 }

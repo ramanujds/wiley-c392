@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,6 +22,12 @@ public class Trainee {
     private String location;
     @Column(name = "joined_date")
     private LocalDate joinDate;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Laptop laptop;
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    private Laptop laptop;
+    @OneToMany(mappedBy = "trainee", cascade = CascadeType.PERSIST)
+//    @JoinTable(name = "trainee_laptop",
+//            joinColumns = @JoinColumn(name = "trainee_id"),
+//            inverseJoinColumns = @JoinColumn(name = "laptop_id"))
+    private List<Laptop> laptops = new ArrayList<>();
+
 }

@@ -65,9 +65,7 @@ public class TraineeController {
     @ResponseStatus(HttpStatus.CREATED)
     public TraineeDto updateTrainee(@PathVariable int id, @RequestBody TraineeDto traineeDto){
         TraineeDto dto = traineeService.updateTrainee(id,traineeDto);
-        LaptopDto laptopDto = laptopService.getLaptopById(traineeDto.laptop().id());
-
-        return new TraineeDto(dto.id(),dto.name(),dto.email(),dto.location(),dto.joinDate(),laptopDto);
+        return dto;
 
     }
 

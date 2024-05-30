@@ -2,14 +2,19 @@ package com.wiley.traineeapp.util;
 
 import com.wiley.traineeapp.dto.LaptopDto;
 import com.wiley.traineeapp.dto.TraineeDto;
+import com.wiley.traineeapp.model.Laptop;
 import com.wiley.traineeapp.model.Trainee;
+
+import java.util.List;
 
 public class TraineeEntityDtoUtil {
 
     public static TraineeDto convertToDto(Trainee trainee) {
-        LaptopDto laptopDto = trainee.getLaptop() != null ? LaptopEntityDtoUtil.toDto(trainee.getLaptop()) : null;
-        return new TraineeDto(trainee.getId(), trainee.getName(), trainee.getEmail(), trainee.getLocation(), trainee.getJoinDate(),
-                laptopDto);
+        List<LaptopDto> laptopDtos = null;
+        if (trainee.getLaptops() != null)
+            laptopDtos = trainee.getLaptops().parallelStream().map(LaptopEntityDtoUtil::toDto).toList();
+        return new TraineeDto(trainee.getId(), trainee.getName(), trainee.getEmail(), trainee.getLocation(), trainee.getJoinDate(), laptopDtos);
+
     }
 
     public static Trainee convertToEntity(TraineeDto traineeDto) {
@@ -19,7 +24,11 @@ public class TraineeEntityDtoUtil {
         trainee.setEmail(traineeDto.email());
         trainee.setLocation(traineeDto.location());
         trainee.setJoinDate(traineeDto.joinDate());
-        if(traineeDto.laptop()!=null)trainee.setLaptop(LaptopEntityDtoUtil.toEntity(traineeDto.laptop()));
+        if (traineeDto.laptops() == null) {
+            return trainee;
+        }
+        List<Laptop> laptops = traineeDto.laptops().parallelStream().map(LaptopEntityDtoUtil::toEntity).toList();
+        trainee.setLaptops(laptops);
         return trainee;
     }
 

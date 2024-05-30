@@ -17,7 +17,7 @@ import static com.wiley.traineeapp.util.TraineeEntityDtoUtil.*;
 import java.util.List;
 
 @Service
-public class TraineeServiceImpl implements TraineeService{
+public class TraineeServiceImpl implements TraineeService {
 
     private TraineeRepository traineeRepository;
 
@@ -27,7 +27,7 @@ public class TraineeServiceImpl implements TraineeService{
     }
 
     public TraineeDto saveTrainee(TraineeDto trainee) {
-        if (traineeRepository.existsById(trainee.id()) || traineeRepository.existsByEmail(trainee.email())){
+        if (traineeRepository.existsById(trainee.id()) || traineeRepository.existsByEmail(trainee.email())) {
             throw new DuplicateRecordException("Email or ID is already present");
         }
         Trainee savedTrainee = traineeRepository.save(convertToEntity(trainee));
@@ -37,7 +37,7 @@ public class TraineeServiceImpl implements TraineeService{
     @Transactional
     public TraineeDto getTraineeById(int id) {
         return traineeRepository.findById(id).map(TraineeEntityDtoUtil::convertToDto)
-                .orElseThrow(()->new RecordNotFoundException("Trainee with id " + id + " Not Present"));
+                .orElseThrow(() -> new RecordNotFoundException("Trainee with id " + id + " Not Present"));
     }
 
     public List<TraineeDto> getAllTrainees() {
@@ -47,7 +47,7 @@ public class TraineeServiceImpl implements TraineeService{
     }
 
     public void deleteTrainee(int id) {
-        if (!traineeRepository.existsById(id)){
+        if (!traineeRepository.existsById(id)) {
             throw new RecordNotFoundException("Trainee with id " + id + " Not Present");
         }
         traineeRepository.deleteById(id);
@@ -61,15 +61,15 @@ public class TraineeServiceImpl implements TraineeService{
         if (trainee.name() != null) traineeToUpdate.setName(trainee.name());
         if (trainee.location() != null) traineeToUpdate.setLocation(trainee.location());
         if (trainee.joinDate() != null) traineeToUpdate.setJoinDate(trainee.joinDate());
-        if (trainee.laptop() != null) traineeToUpdate.setLaptop(LaptopEntityDtoUtil.toEntity(trainee.laptop()));
-
-       traineeRepository.save(traineeToUpdate);
-       Laptop laptop = traineeRepository.findById(id).get().getLaptop();
-       return getTraineeById(id);
+        if (trainee.laptops() != null) {
+            List<Laptop> laptops = trainee.laptops().parallelStream().map(LaptopEntityDtoUtil::toEntity).toList();
+            traineeToUpdate.getLaptops().addAll(laptops);
+        }
+        Trainee updatedTrainee = traineeRepository.save(traineeToUpdate);
+        return TraineeEntityDtoUtil.convertToDto(updatedTrainee);
 
 
     }
-
 
 
     @Override

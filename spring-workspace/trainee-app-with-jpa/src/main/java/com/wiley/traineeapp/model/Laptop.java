@@ -1,9 +1,6 @@
 package com.wiley.traineeapp.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -17,4 +14,7 @@ public class Laptop {
     @Column(length = 50)
     private String model;
     private float price;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    Trainee trainee;
 }
