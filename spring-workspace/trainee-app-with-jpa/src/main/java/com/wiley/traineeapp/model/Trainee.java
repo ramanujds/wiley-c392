@@ -20,4 +20,6 @@ public class Trainee {
     private String location;
     @Column(name = "joined_date")
     private LocalDate joinDate;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Laptop laptop;
 }

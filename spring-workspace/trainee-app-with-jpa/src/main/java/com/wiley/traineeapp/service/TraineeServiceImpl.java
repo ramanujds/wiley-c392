@@ -3,9 +3,12 @@ package com.wiley.traineeapp.service;
 import com.wiley.traineeapp.dto.TraineeDto;
 import com.wiley.traineeapp.exception.DuplicateRecordException;
 import com.wiley.traineeapp.exception.RecordNotFoundException;
+import com.wiley.traineeapp.model.Laptop;
 import com.wiley.traineeapp.model.Trainee;
 import com.wiley.traineeapp.repository.TraineeRepository;
+import com.wiley.traineeapp.util.LaptopEntityDtoUtil;
 import com.wiley.traineeapp.util.TraineeEntityDtoUtil;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,7 @@ public class TraineeServiceImpl implements TraineeService{
         return convertToDto(savedTrainee);
     }
 
+    @Transactional
     public TraineeDto getTraineeById(int id) {
         return traineeRepository.findById(id).map(TraineeEntityDtoUtil::convertToDto)
                 .orElseThrow(()->new RecordNotFoundException("Trainee with id " + id + " Not Present"));
@@ -49,6 +53,7 @@ public class TraineeServiceImpl implements TraineeService{
         traineeRepository.deleteById(id);
     }
 
+    @Transactional
     public TraineeDto updateTrainee(int id, TraineeDto trainee) {
         Trainee traineeToUpdate = traineeRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Trainee with id " + id + " Not Present"));
 
@@ -56,10 +61,13 @@ public class TraineeServiceImpl implements TraineeService{
         if (trainee.name() != null) traineeToUpdate.setName(trainee.name());
         if (trainee.location() != null) traineeToUpdate.setLocation(trainee.location());
         if (trainee.joinDate() != null) traineeToUpdate.setJoinDate(trainee.joinDate());
+        if (trainee.laptop() != null) traineeToUpdate.setLaptop(LaptopEntityDtoUtil.toEntity(trainee.laptop()));
 
-        traineeRepository.save(traineeToUpdate);
+       traineeRepository.save(traineeToUpdate);
+       Laptop laptop = traineeRepository.findById(id).get().getLaptop();
+       return getTraineeById(id);
 
-        return TraineeEntityDtoUtil.convertToDto(traineeToUpdate);
+
     }
 
 

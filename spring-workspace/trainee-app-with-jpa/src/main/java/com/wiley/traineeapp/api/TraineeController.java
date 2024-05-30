@@ -1,7 +1,11 @@
 package com.wiley.traineeapp.api;
 
+import com.wiley.traineeapp.dto.LaptopDto;
 import com.wiley.traineeapp.dto.TraineeDto;
+import com.wiley.traineeapp.service.LaptopService;
 import com.wiley.traineeapp.service.TraineeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +17,12 @@ import java.util.List;
 @RequestMapping("/api/v1/trainees")
 public class TraineeController {
 
+    private static final Logger log = LoggerFactory.getLogger(TraineeController.class);
     @Autowired
     private TraineeService traineeService;
+
+    @Autowired
+    private LaptopService laptopService;
 
 
     @GetMapping
@@ -38,7 +46,12 @@ public class TraineeController {
     }
 
     @GetMapping("/{id}")
-    public TraineeDto getTraineeById(@PathVariable("id") int traineeId){
+    public TraineeDto getTraineeById(@PathVariable("id") int traineeId,
+                                     @RequestHeader("username") String username,
+                                     @RequestHeader("password") String password){
+        log.info("Headers : ");
+        log.info(username);
+        log.info(password);
         return traineeService.getTraineeById(traineeId);
     }
 
@@ -51,7 +64,11 @@ public class TraineeController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public TraineeDto updateTrainee(@PathVariable int id, @RequestBody TraineeDto traineeDto){
-        return traineeService.updateTrainee(id,traineeDto);
+        TraineeDto dto = traineeService.updateTrainee(id,traineeDto);
+        LaptopDto laptopDto = laptopService.getLaptopById(traineeDto.laptop().id());
+
+        return new TraineeDto(dto.id(),dto.name(),dto.email(),dto.location(),dto.joinDate(),laptopDto);
+
     }
 
     @GetMapping("/search")
