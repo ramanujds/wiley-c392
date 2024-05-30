@@ -5,6 +5,7 @@ import com.wiley.traineeapp.exception.DuplicateRecordException;
 import com.wiley.traineeapp.exception.RecordNotFoundException;
 import com.wiley.traineeapp.model.Laptop;
 import com.wiley.traineeapp.model.Trainee;
+import com.wiley.traineeapp.repository.LaptopRepository;
 import com.wiley.traineeapp.repository.TraineeRepository;
 import com.wiley.traineeapp.util.LaptopEntityDtoUtil;
 import com.wiley.traineeapp.util.TraineeEntityDtoUtil;
@@ -20,10 +21,12 @@ import java.util.List;
 public class TraineeServiceImpl implements TraineeService {
 
     private TraineeRepository traineeRepository;
+    private LaptopRepository laptopRepository;
 
     @Autowired
-    public TraineeServiceImpl(TraineeRepository traineeRepository) {
+    public TraineeServiceImpl(TraineeRepository traineeRepository, LaptopRepository laptopRepository) {
         this.traineeRepository = traineeRepository;
+        this.laptopRepository = laptopRepository;
     }
 
     public TraineeDto saveTrainee(TraineeDto trainee) {
@@ -34,7 +37,7 @@ public class TraineeServiceImpl implements TraineeService {
         return convertToDto(savedTrainee);
     }
 
-    @Transactional
+
     public TraineeDto getTraineeById(int id) {
         return traineeRepository.findById(id).map(TraineeEntityDtoUtil::convertToDto)
                 .orElseThrow(() -> new RecordNotFoundException("Trainee with id " + id + " Not Present"));
@@ -53,23 +56,32 @@ public class TraineeServiceImpl implements TraineeService {
         traineeRepository.deleteById(id);
     }
 
-    @Transactional
+
+
+
+
+
     public TraineeDto updateTrainee(int id, TraineeDto trainee) {
+
+
         Trainee traineeToUpdate = traineeRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Trainee with id " + id + " Not Present"));
 
         if (trainee.email() != null) traineeToUpdate.setEmail(trainee.email());
         if (trainee.name() != null) traineeToUpdate.setName(trainee.name());
         if (trainee.location() != null) traineeToUpdate.setLocation(trainee.location());
         if (trainee.joinDate() != null) traineeToUpdate.setJoinDate(trainee.joinDate());
-        if (trainee.laptops() != null) {
-            List<Laptop> laptops = trainee.laptops().parallelStream().map(LaptopEntityDtoUtil::toEntity).toList();
-            traineeToUpdate.getLaptops().addAll(laptops);
+        if (traineeToUpdate.getLaptops() != null) {
+            traineeToUpdate.getLaptops().addAll(trainee.laptops().parallelStream().map(LaptopEntityDtoUtil::toEntity).toList());
         }
         Trainee updatedTrainee = traineeRepository.save(traineeToUpdate);
-        return TraineeEntityDtoUtil.convertToDto(updatedTrainee);
+
+        return convertToDto(updatedTrainee);
 
 
     }
+
+
+
 
 
     @Override

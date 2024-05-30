@@ -1,7 +1,10 @@
 package com.wiley.traineeapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -15,6 +18,8 @@ public class Laptop {
     private String model;
     private float price;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    Trainee trainee;
+
+
+
+
 }
