@@ -15,6 +15,6 @@ public class Laptop {
     private String model;
     private float price;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    Trainee trainee;
+//    @ManyToOne(cascade = CascadeType.PERSIST)
+//    Trainee trainee;
 }

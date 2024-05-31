@@ -24,10 +24,10 @@ public class Trainee {
     private LocalDate joinDate;
 //    @OneToOne(cascade = CascadeType.PERSIST)
 //    private Laptop laptop;
-    @OneToMany(mappedBy = "trainee", cascade = CascadeType.PERSIST)
-//    @JoinTable(name = "trainee_laptop",
-//            joinColumns = @JoinColumn(name = "trainee_id"),
-//            inverseJoinColumns = @JoinColumn(name = "laptop_id"))
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "trainee_laptop",
+            joinColumns = @JoinColumn(name = "trainee_id"),
+            inverseJoinColumns = @JoinColumn(name = "laptop_id"))
     private List<Laptop> laptops = new ArrayList<>();
 
 }
