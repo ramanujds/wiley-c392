@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo App</title>
-    <script src="script.js"></script>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="fetchTodos()">
     <div class="container">
     <h1>ToDo App</h1>
 
@@ -44,13 +44,16 @@
 
             <button type="submit" class="btn btn-dark" id="add-task-btn">Add Task</button>
         </form>
+        <button type="button" onclick="fetchTodos()" class="btn btn-light" id="fetch-task-btn">Fetch Task</button>
     </div>
 
     <div>
         <h2>List of Tasks</h2>
-        <ul id="todo-list"></ul>
+        <ul id="todo-list">
+
+        </ul>
     </div>
 </div>
 </body>
-
+<script src="script.js"></script>
 </html>
