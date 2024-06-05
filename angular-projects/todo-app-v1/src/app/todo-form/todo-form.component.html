@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-6">
+        <input class="form-control" placeholder="Input a title to serach" type="text" name="title" id="title" [(ngModel)]="title" #inpTitle>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-success" (click)="setTitle(inpTitle.value)">Search</button>
+    </div>
+    <p class="text-dark">Searching for Title : <strong>{{title}}</strong> </p>
+</div>
+
+
