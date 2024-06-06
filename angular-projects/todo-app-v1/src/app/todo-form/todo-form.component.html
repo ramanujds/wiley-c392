@@ -1,14 +1,29 @@
-<div class="row">
-    <div class="col-4">
-        <input class="form-control" placeholder="Input a Title" type="text" name="title" id="title" #inpTitle>
+<form (submit)="addTodo(todoForm.value)" #todoForm="ngForm">
+    <div class="form-group">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" required ngModel
+            pattern="[a-zA-Z0-9 ]{3,}" 
+            placeholder="Input a Title" 
+            type="text" name="title" 
+            id="title" #inpTitle="ngModel"
+            [class.is-valid]="inpTitle.touched && inpTitle.valid"
+            [class.is-invalid]="inpTitle.touched && inpTitle.invalid">
+            <p *ngIf="inpTitle.touched && inpTitle.invalid">
+                <small *ngIf="inpTitle.errors?.['required']" class="text-danger">Title is required</small>
+                <small *ngIf="inpTitle.errors?.['pattern']" class="text-danger">Invalid characters or invalid title length</small>
+            </p>
     </div>
-    <div class="col-4">
-        <input class="form-control" placeholder="Input Description" type="text" name="description" id="description" #inpDescription>
+    <div class="form-group">
+        <label class="form-label" for="description">Description</label>
+        <input class="form-control" required ngModel 
+        placeholder="Input Description" 
+        type="text" name="description" 
+        id="description" #inpDescription="ngModel">
     </div>
-    <div class="col-4">
-        <button class="btn btn-success" (click)="addTodo({title:inpTitle.value,description:inpDescription.value,status:false})">Add Todo</button>
+    <div class="form-group">
+        <p><button [disabled]="!todoForm.valid" type="submit" class="btn btn-success">Add Todo</button></p>
     </div>
     <!-- <p class="text-dark">Searching for Title : <strong>{{title}}</strong> </p> -->
-</div>
 
+</form>
 

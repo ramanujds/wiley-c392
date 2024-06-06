@@ -19,8 +19,10 @@ export class TodoFormComponent {
   //   this.title=title;
   // }
 
-  addTodo(todo:any){
-      this.todos?.push(todo)
+  addTodo(todo:Todo){
+     todo.status=false;
+     this.todos?.push(todo)
+     
   }
 
 }
