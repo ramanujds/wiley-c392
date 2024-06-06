@@ -1,11 +1,14 @@
 <div class="row">
-    <div class="col-6">
-        <input class="form-control" placeholder="Input a title to serach" type="text" name="title" id="title" [(ngModel)]="title" #inpTitle>
+    <div class="col-4">
+        <input class="form-control" placeholder="Input a Title" type="text" name="title" id="title" #inpTitle>
     </div>
-    <div class="col-3">
-        <button class="btn btn-success" (click)="setTitle(inpTitle.value)">Search</button>
+    <div class="col-4">
+        <input class="form-control" placeholder="Input Description" type="text" name="description" id="description" #inpDescription>
     </div>
-    <p class="text-dark">Searching for Title : <strong>{{title}}</strong> </p>
+    <div class="col-4">
+        <button class="btn btn-success" (click)="addTodo({title:inpTitle.value,description:inpDescription.value,status:false})">Add Todo</button>
+    </div>
+    <!-- <p class="text-dark">Searching for Title : <strong>{{title}}</strong> </p> -->
 </div>
 
 

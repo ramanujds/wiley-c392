@@ -1,4 +1,5 @@
-<app-todo-form></app-todo-form>
+<app-todo-form [todos]="todos"></app-todo-form>
+<p class="text-danger" style="padding: 10px;" *ngIf="!todos.length">No Todos Available.. Please add few</p>
 <div class="row">
 <div class="col-4" *ngFor="let todo of todos">
     <app-todo [todo]="todo"></app-todo>

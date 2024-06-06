@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { NavComponent } from './nav/nav.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
+import { MarkCompletedDirective } from './mark-completed.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TodoFormComponent } from './todo-form/todo-form.component';
     MainComponent,
     NavComponent,
     TodoComponent,
-    TodoFormComponent
+    TodoFormComponent,
+    MarkCompletedDirective
   ],
   imports: [
     BrowserModule,

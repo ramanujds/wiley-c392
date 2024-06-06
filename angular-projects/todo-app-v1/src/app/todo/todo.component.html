@@ -1,14 +1,6 @@
-
-
-    <div class="card" style="width: 18rem;">
-        <img src="https://source.unsplash.com/random/200x200?sig={{todo?.title}}" class="card-img-top" alt="No Images Available">
-        <div class="card-body">
-          <h5 class="card-title">{{todo?.title}}</h5>
-          <p class="card-text">{{todo?.description}}</p>
-          <p class="card-text">{{todo?.status}}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
-
-
+<!-- <div [ngStyle]="{'background-color':todo?.status?'green':'white'}" class="todo-container"> -->
+    <div class="todo-container" [appMarkCompleted]="todo?.status">
+    <p>Title : {{todo?.title}}</p>
+    <p>Description : {{todo?.description}}</p>
+    <p>Status : {{todo?.status?'Completed':'Pending'}}</p>
+</div>

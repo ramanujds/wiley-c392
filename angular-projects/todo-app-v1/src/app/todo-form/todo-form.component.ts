@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Todo } from '../../models/Todo';
 
 @Component({
   selector: 'app-todo-form',
@@ -7,10 +8,19 @@ import { Component } from '@angular/core';
 })
 export class TodoFormComponent {
 
-  title?:string;
+  // title?:string;
 
-  setTitle(title:string){
-    this.title=title;
+
+
+  @Input("todos")
+  todos?:Array<Todo>
+
+  // setTitle(title:string){
+  //   this.title=title;
+  // }
+
+  addTodo(todo:any){
+      this.todos?.push(todo)
   }
 
 }
