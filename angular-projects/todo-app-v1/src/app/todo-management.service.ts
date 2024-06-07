@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/Todo';
-import { identity } from 'rxjs';
+import { Observable, identity, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,11 @@ export class TodoManagementService {
     if(index!=-1){
       this.todos.splice(index,1)
     }
+  }
+
+  checkTodoByTitle(title:string){
+    return of(this.todos.some(todo=>todo.title===title))
+
   }
 
   constructor() { }

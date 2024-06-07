@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { MarkCompletedDirective } from './mark-completed.directive';
+import { TodoFormReactiveComponent } from './todo-form-reactive/todo-form-reactive.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { MarkCompletedDirective } from './mark-completed.directive';
     NavComponent,
     TodoComponent,
     TodoFormComponent,
-    MarkCompletedDirective
+    MarkCompletedDirective,
+    TodoFormReactiveComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
