@@ -5,6 +5,6 @@
     <p>Status : {{todo?.status?'Completed':'Pending'}}</p>
     <div>
         <button class="btn btn-dark" (click)="markAsCompleted()" [disabled]="todo?.status">Mark as Completed</button>
-       <button class="btn btn-danger" (click)="deleteTodo(todo?.title)">Remove</button>
+       <button class="btn btn-danger" (click)="deleteTodo()">Remove</button>
     </div>
 </div>

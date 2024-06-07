@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { todoValidator } from '../../util/TodoValidator';
 import { TodoManagementService } from '../todo-management.service';
+import { TodoApiService } from '../todo-api.service';
+import { Todo } from '../../models/Todo';
 
 @Component({
   selector: 'app-todo-form-reactive',
@@ -10,7 +12,7 @@ import { TodoManagementService } from '../todo-management.service';
 })
 export class TodoFormReactiveComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder,private todoService:TodoManagementService){}
+  constructor(private formBuilder:FormBuilder,private todoService:TodoApiService){}
 
   todoForm:any;
 
@@ -28,12 +30,20 @@ export class TodoFormReactiveComponent implements OnInit {
       )
   }
 
-  addTodo(todo:any){
-      this.todoService.addTodo(todo)
+  addTodo(todo:Todo){
+    this.todoService.addTodo(todo).subscribe(
+      response=>{console.log(response);
+        alert("New Task Added "+response.title)
+      },
+        // error=>console.log(error)
+      )
       
-  }
+    }
 
-
-
-
+    
+    
 }
+
+
+
+

@@ -12,6 +12,8 @@ import { TodoComponent } from './todo/todo.component';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import { MarkCompletedDirective } from './mark-completed.directive';
 import { TodoFormReactiveComponent } from './todo-form-reactive/todo-form-reactive.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TodoContainerComponent } from './todo-container/todo-container.component';
 
 @NgModule({
   declarations: [
@@ -23,14 +25,16 @@ import { TodoFormReactiveComponent } from './todo-form-reactive/todo-form-reacti
     TodoComponent,
     TodoFormComponent,
     MarkCompletedDirective,
-    TodoFormReactiveComponent
+    TodoFormReactiveComponent,
+    TodoContainerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,ReactiveFormsModule
-  ],
-  providers: [],
+
+],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

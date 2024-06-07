@@ -1,10 +1,7 @@
 <!-- <app-todo-form [todos]="todoService.todos"></app-todo-form> -->
-<app-todo-form-reactive></app-todo-form-reactive>
-<p class="text-danger" style="padding: 10px;" *ngIf="!todoService.todos.length">No Todos Available.. Please add few</p>
-<div class="row">
-<div class="col-4" *ngFor="let todo of todoService.todos">
-    <app-todo [todo]="todo"></app-todo>
-</div>
+<div class="col-12"><app-todo-form-reactive></app-todo-form-reactive></div>
 
-</div>
+<div class="col-12"><app-todo-container></app-todo-container></div>
+
+
 
