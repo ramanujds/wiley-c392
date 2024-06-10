@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../models/Todo';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TodoApiService } from '../todo-api.service';
+import { ErrorHandlerService } from '../error-handler.service';
 
 @Component({
   selector: 'app-view-todo',
@@ -13,7 +14,7 @@ export class ViewTodoComponent implements OnInit {
 todo?:Todo;
 id?:number;
 
-constructor(private router:ActivatedRoute, private todoService:TodoApiService){}
+constructor(private router:ActivatedRoute, private todoService:TodoApiService, private route:Router, private errorHandler:ErrorHandlerService){}
 
 ngOnInit(): void {
     this.router.params.subscribe(
@@ -21,7 +22,18 @@ ngOnInit(): void {
         const id = value['id']
         if(id){
             this.todoService.fetchTodoById(id).subscribe(
-              response=>this.todo=response
+              response=>this.todo=response,
+
+              error =>{
+                this.errorHandler.errorDetails={
+                  code: error.error.status,
+                  message: error.error.message,
+                  status:error.error.error
+                }
+                
+                
+                this.route.navigate(['error'])
+              }
             )
         }
       }

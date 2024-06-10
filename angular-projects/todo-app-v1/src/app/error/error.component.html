@@ -1,4 +1,10 @@
-<div class="message">
+<div *ngIf="!errorHandler.errorDetails" class="message">
 <h1 class="text-danger">Error 404</h1>
 <h3>The Page you are looking for Not Found</h3>
 </div>
+
+<div *ngIf="errorHandler.errorDetails" class="message">
+    <h1 class="text-danger">Error {{errorHandler.errorDetails.code}}:{{errorHandler.errorDetails.status}}</h1>
+    <h3>{{errorHandler.errorDetails.message}}</h3>
+
+    </div>

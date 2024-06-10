@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, input } from '@angular/core';
+import { ErrorHandlerService } from '../error-handler.service';
 
 @Component({
   selector: 'app-error',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './error.component.css'
 })
 export class ErrorComponent {
+
+constructor(public errorHandler:ErrorHandlerService){}
 
 }
