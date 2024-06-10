@@ -5,6 +5,8 @@
     <p>Status : {{todo?.status?'Completed':'Pending'}}</p>
     <div>
         <button class="btn btn-dark" (click)="markAsCompleted()" [disabled]="todo?.status">Mark as Completed</button>
-       <button class="btn btn-danger" (click)="deleteTodo()">Remove</button>
+       <!-- <button class="btn btn-danger" (click)="deleteTodo()">Remove</button> -->
+       <a class="btn btn-info" routerLink='{{todo?.id}}'>Get Details</a>
+
     </div>
 </div>
