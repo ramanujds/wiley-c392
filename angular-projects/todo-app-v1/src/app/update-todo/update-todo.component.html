@@ -1,0 +1,37 @@
+<form (submit)="addTodo(todoForm.value)" [formGroup]="todoForm">
+    <div class="form-group">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control"
+            placeholder="Input a Title" 
+            type="text" name="title" 
+            id="title" formControlName="title"
+            [class.is-valid]="todoForm.get('title')?.dirty && todoForm.get('title')?.valid"
+            [class.is-invalid]="todoForm.get('title')?.dirty && todoForm.get('title')?.invalid">
+            <p *ngIf="todoForm.get('title')?.dirty">
+                <small *ngIf="todoForm.get('title')?.errors?.['required']" class="text-danger">Title is required</small>
+                <small *ngIf="todoForm.get('title')?.errors?.['pattern']" class="text-danger">Invalid characters or invalid title length</small>
+                <small *ngIf="todoForm.get('title')?.errors?.['duplicate-todo']" class="text-danger">You already have this in your todo list</small>
+            </p>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="description">Description</label>
+        <input class="form-control"
+        placeholder="Input Description" 
+        type="text" name="description" 
+        id="description" 
+        formControlName="description"
+        >
+    </div>
+    <div class="form-group">
+        <p><button [disabled]="todoForm.invalid" type="submit" class="btn btn-success">Add Todo</button></p>
+    </div>
+
+    <!-- <div>
+        {{todoForm.value|json}}
+    </div> -->
+    <!-- <p class="text-dark">Searching for Title : <strong>{{title}}</strong> </p> -->
+
+</form>
+
+
+

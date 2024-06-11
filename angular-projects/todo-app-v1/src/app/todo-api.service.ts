@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
+import { ErrorHandler, Injectable } from '@angular/core';
 import { Todo } from '../models/Todo';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { ErrorHandlerService } from './error-handler.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoApiService {
 
+
+
   private baseUrl = "http://localhost:9090/api/v1/jpa-tasks";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private errorHandler:ErrorHandlerService,private router:Router) { }
 
 
   addTodo(todo:Todo):Observable<Todo>{
@@ -18,11 +22,50 @@ export class TodoApiService {
   }
 
   fetchTodos():Observable<Array<Todo>>{
-    return this.httpClient.get<Array<Todo>>(this.baseUrl);
+    return this.httpClient.get<Array<Todo>>(this.baseUrl)
+    .pipe(
+      catchError(
+        err=>{
+          console.log('Error!!!');
+          this.errorHandler.errorDetails={
+            code:404,
+            status:'Not Found',
+            message:'Unable to fetch data from server'
+          };
+        
+          this.router.navigate(['error'])
+
+         return throwError(()=> err)
+        }
+          )
+          
+        
+      
+    )
   }
 
   fetchTodoById(id:number):Observable<Todo>{
-    return this.httpClient.get<Todo>(`${this.baseUrl}/id/${id}`);
+    return this.httpClient.get<Todo>(`${this.baseUrl}/id/${id}`)
+                .pipe(
+                  catchError(
+                    err=>{
+                      console.log('Error!!!');
+                      this.errorHandler.errorDetails={
+                        code:404,
+                        status:'Not Found',
+                        message:'Unable to find ToDo with id : '+id
+                      };
+                    
+                      this.router.navigate(['error'])
+
+                     return throwError(()=> err)
+                    }
+                      )
+                      
+                    
+                  
+                )
+    ;
   }
 
 

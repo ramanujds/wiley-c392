@@ -1,24 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { Todo } from '../../models/Todo';
-import { TodoManagementService } from '../todo-management.service';
 import { TodoApiService } from '../todo-api.service';
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrl: './todo.component.css'
+  selector: 'app-todo-details',
+  templateUrl: './todo-details.component.html',
+  styleUrl: './todo-details.component.css'
 })
-export class TodoComponent {
+export class TodoDetailsComponent {
 
   @Input("todo")
   todo?:Todo;
 
-  amount=100;
+  showUpdateForm=false;
 
-  constructor(private todoService:TodoApiService){
-    console.log("ToDo Component Loaded");
-    
-  }
+  constructor(private todoService:TodoApiService){}
 
   markAsCompleted(){
     if(this.todo){
@@ -36,6 +32,10 @@ export class TodoComponent {
             alert(`${this.todo?.title} Removed`)
             this.todo=undefined
         })
+  }
+
+  toggleShowUpdateForm(){
+    this.showUpdateForm=!this.showUpdateForm
   }
 
 }

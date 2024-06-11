@@ -1,0 +1,17 @@
+<div class="todo-container">
+    <p>Title : {{todo?.title}}</p>
+    <p>Description : {{todo?.description}}</p>
+    <p>Status : {{todo?.status?'Completed':'Pending'}}</p>
+    <div>
+        <button class="btn btn-dark" (click)="markAsCompleted()" [disabled]="todo?.status">Mark as Completed</button>
+     <button class="btn btn-danger" (click)="deleteTodo()">Remove</button>
+    <button class="btn btn-info" (click)="toggleShowUpdateForm()">Update</button>
+    
+
+
+    </div>
+
+    <div *ngIf="showUpdateForm">
+        <app-update-todo [todo]="todo"></app-update-todo>
+    </div>
+</div>

@@ -27,6 +27,10 @@ const routes: Routes = [
   path:'view-todos/:id',component:ViewTodoComponent,pathMatch:'full'
  },
  {
+  path:'play',
+  loadChildren:()=> import('./play-games/play-games.module').then(m=>m.PlayGamesModule)
+ },
+ {
   path:'error', component:ErrorComponent,pathMatch:'full'
  },
  {

@@ -17,6 +17,9 @@ import { TodoContainerComponent } from './todo-container/todo-container.componen
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { ViewTodoComponent } from './view-todo/view-todo.component';
 import { ErrorComponent } from './error/error.component';
+import { UpdateTodoComponent } from './update-todo/update-todo.component';
+import { TodoDetailsComponent } from './todo-details/todo-details.component';
+import { StatusTextPipe } from './status-text.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { ErrorComponent } from './error/error.component';
     TodoContainerComponent,
     HomeComponentComponent,
     ViewTodoComponent,
-    ErrorComponent
+    ErrorComponent,
+    UpdateTodoComponent,
+    TodoDetailsComponent,
+    StatusTextPipe
   ],
   imports: [
     BrowserModule,
@@ -43,4 +49,11 @@ import { ErrorComponent } from './error/error.component';
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor(){
+    console.log('App Module Loaded');
+    
+  }
+
+}

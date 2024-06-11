@@ -22,18 +22,8 @@ ngOnInit(): void {
         const id = value['id']
         if(id){
             this.todoService.fetchTodoById(id).subscribe(
-              response=>this.todo=response,
-
-              error =>{
-                this.errorHandler.errorDetails={
-                  code: error.error.status,
-                  message: error.error.message,
-                  status:error.error.error
-                }
-                
-                
-                this.route.navigate(['error'])
-              }
+              response=>this.todo=response
+             
             )
         }
       }

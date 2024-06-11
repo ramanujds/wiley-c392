@@ -2,7 +2,8 @@
     <div class="todo-container" [appMarkCompleted]="todo?.status">
     <p>Title : {{todo?.title}}</p>
     <p>Description : {{todo?.description}}</p>
-    <p>Status : {{todo?.status?'Completed':'Pending'}}</p>
+    <p>Status : {{todo?.status|statusText}}</p>
+    <p>Amount : {{amount|currency:'INR'}}</p>
     <div>
         <button class="btn btn-dark" (click)="markAsCompleted()" [disabled]="todo?.status">Mark as Completed</button>
        <!-- <button class="btn btn-danger" (click)="deleteTodo()">Remove</button> -->
