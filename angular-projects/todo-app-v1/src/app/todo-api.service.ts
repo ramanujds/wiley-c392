@@ -12,7 +12,7 @@ export class TodoApiService {
 
 
 
-  private baseUrl = "http://localhost:9090/api/v1/jpa-tasks";
+  private baseUrl = "/api/v1/jpa-tasks";
 
   constructor(private httpClient:HttpClient,private errorHandler:ErrorHandlerService,private router:Router) { }
 
