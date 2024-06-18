@@ -1,5 +1,6 @@
-package com.foodieapp.menuservice.model;
+package com.foodieapp.orderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ public class MenuItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
 
     @Column(name = "item_name")

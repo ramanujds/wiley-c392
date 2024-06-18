@@ -3,10 +3,7 @@ package com.foodieapp.menuservice.api;
 import com.foodieapp.menuservice.model.MenuItem;
 import com.foodieapp.menuservice.service.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/menus")
@@ -16,7 +13,7 @@ public class MenuItemApi {
     private MenuItemService menuItemService;
 
     @GetMapping("/{id}")
-    public MenuItem getMenuItem(long id){
+    public MenuItem getMenuItem(@PathVariable long id){
         return menuItemService.getMenuItem(id);
     }
 
